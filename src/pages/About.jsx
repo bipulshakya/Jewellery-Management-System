@@ -66,6 +66,16 @@ export default function About() {
       </div>
 
       <div className="glass-card-static p-6">
+        <h2 className="text-sm font-bold uppercase tracking-wider text-text-tertiary mb-3">Repository Description</h2>
+        <p className="text-sm text-text-secondary leading-6">
+          Jewellery-Management-System is a production-style frontend repository for a jewellery ERP and POS platform.
+          It focuses on operational workflows including inventory valuation, customer lifecycle, billing, repair tracking,
+          and analytics dashboards. The codebase is organized into modular pages and reusable UI components to make
+          future backend/API integration straightforward.
+        </p>
+      </div>
+
+      <div className="glass-card-static p-6">
         <h2 className="text-sm font-bold uppercase tracking-wider text-text-tertiary mb-3">Version & Scope</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
           <div className="p-3 rounded-xl bg-bg-primary">
