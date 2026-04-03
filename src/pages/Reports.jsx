@@ -169,7 +169,7 @@ export default function Reports() {
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold whitespace-nowrap transition-all ${activeTab === tab.id ? 'gold-gradient text-[#0F0F1A]' : ''}`}
+            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold whitespace-nowrap transition-all ${activeTab === tab.id ? 'gold-gradient text-dark-900' : ''}`}
             style={activeTab !== tab.id ? { background: 'var(--bg-card)', color: 'var(--text-secondary)', border: '1px solid var(--border-color-subtle)' } : {}}
           >
             <tab.icon size={16} />
@@ -330,7 +330,7 @@ export default function Reports() {
                       <td className="font-mono text-xs">{i.sku}</td>
                       <td className="font-semibold text-sm">{i.name}</td>
                       <td className="text-xs capitalize">{i.metalType} {i.purity}</td>
-                      <td className="font-mono font-bold text-[#EF4444]">{i.quantity}</td>
+                      <td className="font-mono font-bold text-ruby-500">{i.quantity}</td>
                       <td className="font-mono text-sm">{i.reorderPoint}</td>
                       <td><span className="badge badge-ruby">Low Stock</span></td>
                     </tr>
@@ -450,7 +450,7 @@ export default function Reports() {
                       <td className="text-xs font-mono">{c.phone}</td>
                       <td className="font-mono text-center">{c.salesCount}</td>
                       <td className="font-mono font-semibold gold-text">{formatCurrency(c.totalSpent)}</td>
-                      <td className={`font-mono ${c.outstandingBalance > 0 ? 'text-[#EF4444]' : 'text-[#10B981]'}`}>{formatCurrency(c.outstandingBalance)}</td>
+                      <td className={`font-mono ${c.outstandingBalance > 0 ? 'text-ruby-500' : 'text-emerald-500'}`}>{formatCurrency(c.outstandingBalance)}</td>
                       <td className="font-mono" style={{ color: '#DAA520' }}>{c.loyaltyPoints}</td>
                     </tr>
                   ))}
