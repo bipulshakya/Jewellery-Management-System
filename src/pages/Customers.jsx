@@ -73,8 +73,8 @@ export default function Customers() {
       {/* Header */}
       <div className="flex items-center justify-between flex-wrap gap-4">
         <div>
-          <h1 className="text-2xl font-bold" style={{ color: 'var(--text-primary)' }}>Customer Management</h1>
-          <p className="text-sm mt-1" style={{ color: 'var(--text-tertiary)' }}>
+          <h1 className="text-2xl font-bold text-text-primary">Customer Management</h1>
+          <p className="text-sm mt-1 text-text-tertiary">
             {customers.length} customers • Outstanding: {formatCurrency(totalOutstanding)}
           </p>
         </div>
@@ -92,7 +92,7 @@ export default function Customers() {
           { label: 'Outstanding', value: formatCurrency(totalOutstanding), color: '#EF4444' },
         ].map((stat, i) => (
           <div key={i} className="glass-card-static p-4">
-            <p className="text-[10px] font-bold uppercase tracking-wider" style={{ color: 'var(--text-tertiary)' }}>{stat.label}</p>
+            <p className="text-[10px] font-bold uppercase tracking-wider text-text-tertiary">{stat.label}</p>
             <p className="text-lg font-bold font-mono mt-1" style={{ color: stat.color }}>{stat.value}</p>
           </div>
         ))}
@@ -100,7 +100,7 @@ export default function Customers() {
 
       {/* Search */}
       <div className="relative max-w-md">
-        <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: 'var(--text-tertiary)' }} />
+        <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-text-tertiary" />
         <input
           type="text"
           placeholder="Search by name, phone, or email..."
@@ -121,33 +121,33 @@ export default function Customers() {
                 </span>
               </div>
               <div className="flex-1 min-w-0">
-                <h3 className="text-sm font-bold truncate" style={{ color: 'var(--text-primary)' }}>{customer.name}</h3>
+                <h3 className="text-sm font-bold truncate text-text-primary">{customer.name}</h3>
                 <div className="flex items-center gap-1 mt-0.5">
-                  <Phone size={10} style={{ color: 'var(--text-tertiary)' }} />
-                  <span className="text-xs" style={{ color: 'var(--text-tertiary)' }}>{customer.phone}</span>
+                  <Phone size={10} className="text-text-tertiary" />
+                  <span className="text-xs text-text-tertiary">{customer.phone}</span>
                 </div>
               </div>
               <div className="flex gap-1">
-                <button onClick={(e) => { e.stopPropagation(); openEdit(customer); }} className="btn btn-ghost btn-sm p-1.5">
+                <button onClick={(e) => { e.stopPropagation(); openEdit(customer); }} className="p-1.5 rounded-lg text-text-tertiary hover:bg-bg-tertiary hover:text-text-primary transition-colors">
                   <Edit3 size={13} />
                 </button>
-                <button onClick={(e) => { e.stopPropagation(); setDeleteConfirm(customer.id); }} className="btn btn-ghost btn-sm p-1.5 text-[#EF4444]">
+                <button onClick={(e) => { e.stopPropagation(); setDeleteConfirm(customer.id); }} className="p-1.5 rounded-lg text-text-tertiary hover:bg-bg-tertiary hover:text-text-primary transition-colors">
                   <Trash2 size={13} />
                 </button>
               </div>
             </div>
 
             <div className="grid grid-cols-3 gap-3 text-center">
-              <div className="p-2 rounded-lg" style={{ background: 'var(--bg-primary)' }}>
-                <p className="text-[10px] uppercase font-bold" style={{ color: 'var(--text-tertiary)' }}>Purchases</p>
-                <p className="text-xs font-mono font-bold" style={{ color: 'var(--text-primary)' }}>{formatCurrency(customer.totalPurchases)}</p>
+              <div className="p-2 rounded-lg bg-bg-primary">
+                <p className="text-[10px] uppercase font-bold text-text-tertiary">Purchases</p>
+                <p className="text-xs font-mono font-bold text-text-primary">{formatCurrency(customer.totalPurchases)}</p>
               </div>
-              <div className="p-2 rounded-lg" style={{ background: 'var(--bg-primary)' }}>
-                <p className="text-[10px] uppercase font-bold" style={{ color: 'var(--text-tertiary)' }}>Points</p>
+              <div className="p-2 rounded-lg bg-bg-primary">
+                <p className="text-[10px] uppercase font-bold text-text-tertiary">Points</p>
                 <p className="text-xs font-mono font-bold" style={{ color: '#DAA520' }}>{customer.loyaltyPoints}</p>
               </div>
-              <div className="p-2 rounded-lg" style={{ background: 'var(--bg-primary)' }}>
-                <p className="text-[10px] uppercase font-bold" style={{ color: 'var(--text-tertiary)' }}>Balance</p>
+              <div className="p-2 rounded-lg bg-bg-primary">
+                <p className="text-[10px] uppercase font-bold text-text-tertiary">Balance</p>
                 <p className={`text-xs font-mono font-bold ${customer.outstandingBalance > 0 ? 'text-[#EF4444]' : 'text-[#10B981]'}`}>
                   {formatCurrency(customer.outstandingBalance)}
                 </p>
@@ -164,8 +164,8 @@ export default function Customers() {
         ))}
         {filteredCustomers.length === 0 && (
           <div className="col-span-full text-center py-12">
-            <User size={40} className="mx-auto mb-3" style={{ color: 'var(--text-tertiary)' }} />
-            <p className="text-sm" style={{ color: 'var(--text-tertiary)' }}>No customers found</p>
+            <User size={40} className="mx-auto mb-3 text-text-tertiary" />
+            <p className="text-sm text-text-tertiary">No customers found</p>
           </div>
         )}
       </div>
@@ -221,7 +221,7 @@ export default function Customers() {
             </>
           )}
         </div>
-        <div className="flex justify-end gap-3 mt-6 pt-4 border-t" style={{ borderColor: 'var(--border-color-subtle)' }}>
+        <div className="flex justify-end gap-3 mt-6 pt-4 border-t border-border-color-subtle">
           <button className="btn btn-secondary" onClick={() => setShowModal(false)}>Cancel</button>
           <button className="btn btn-primary" onClick={handleSave}>{editCustomer ? 'Update' : 'Add Customer'}</button>
         </div>
@@ -231,19 +231,19 @@ export default function Customers() {
       <Modal isOpen={showDetail} onClose={() => setShowDetail(false)} title="Customer Profile" width="max-w-xl">
         {detailCustomer && (
           <div className="space-y-5">
-            <div className="flex items-center gap-4 pb-4 border-b" style={{ borderColor: 'var(--border-color-subtle)' }}>
+            <div className="flex items-center gap-4 pb-4 border-b border-border-color-subtle">
               <div className="w-16 h-16 rounded-full gold-gradient flex items-center justify-center">
                 <span className="text-xl font-bold text-[#0F0F1A]">
                   {detailCustomer.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
                 </span>
               </div>
               <div>
-                <h3 className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>{detailCustomer.name}</h3>
-                <div className="flex items-center gap-3 mt-1 text-xs" style={{ color: 'var(--text-tertiary)' }}>
+                <h3 className="text-lg font-bold text-text-primary">{detailCustomer.name}</h3>
+                <div className="flex items-center gap-3 mt-1 text-xs text-text-tertiary">
                   <span className="flex items-center gap-1"><Phone size={10} /> {detailCustomer.phone}</span>
                   {detailCustomer.email && <span className="flex items-center gap-1"><Mail size={10} /> {detailCustomer.email}</span>}
                 </div>
-                <div className="flex items-center gap-1 mt-0.5 text-xs" style={{ color: 'var(--text-tertiary)' }}>
+                <div className="flex items-center gap-1 mt-0.5 text-xs text-text-tertiary">
                   <MapPin size={10} /> {detailCustomer.address}
                 </div>
               </div>
@@ -258,8 +258,8 @@ export default function Customers() {
                 ['PAN', detailCustomer.pan || 'Not provided', '#8B5CF6'],
                 ['KYC (Citizenship)', detailCustomer.citizenship === 'Yes' ? 'Verified ✓' : 'Not on file', detailCustomer.citizenship === 'Yes' ? '#10B981' : '#EF4444'],
               ].map(([label, val, color]) => (
-                <div key={label} className="p-3 rounded-xl" style={{ background: 'var(--bg-primary)' }}>
-                  <p className="text-[10px] uppercase font-bold" style={{ color: 'var(--text-tertiary)' }}>{label}</p>
+                <div key={label} className="p-3 rounded-xl bg-bg-primary">
+                  <p className="text-[10px] uppercase font-bold text-text-tertiary">{label}</p>
                   <p className="text-sm font-bold mt-1" style={{ color }}>{val}</p>
                 </div>
               ))}
@@ -272,7 +272,7 @@ export default function Customers() {
                     <Gift size={14} color="#8B5CF6" />
                     <div>
                       <p className="text-[10px] uppercase font-bold" style={{ color: '#8B5CF6' }}>Birthday</p>
-                      <p className="text-xs font-semibold" style={{ color: 'var(--text-primary)' }}>{formatDate(detailCustomer.birthday)}</p>
+                      <p className="text-xs font-semibold text-text-primary">{formatDate(detailCustomer.birthday)}</p>
                     </div>
                   </div>
                 )}
@@ -281,7 +281,7 @@ export default function Customers() {
                     <Award size={14} color="#EC4899" />
                     <div>
                       <p className="text-[10px] uppercase font-bold" style={{ color: '#EC4899' }}>Anniversary</p>
-                      <p className="text-xs font-semibold" style={{ color: 'var(--text-primary)' }}>{formatDate(detailCustomer.anniversary)}</p>
+                      <p className="text-xs font-semibold text-text-primary">{formatDate(detailCustomer.anniversary)}</p>
                     </div>
                   </div>
                 )}
@@ -290,19 +290,19 @@ export default function Customers() {
 
             {/* Purchase History */}
             <div>
-              <h4 className="text-xs font-bold uppercase tracking-wider mb-3" style={{ color: 'var(--text-tertiary)' }}>Purchase History</h4>
+              <h4 className="text-xs font-bold uppercase tracking-wider mb-3 text-text-tertiary">Purchase History</h4>
               {(() => {
                 const custSales = getCustomerSales(detailCustomer.id);
                 if (custSales.length === 0) {
-                  return <p className="text-xs text-center py-4" style={{ color: 'var(--text-tertiary)' }}>No purchase history</p>;
+                  return <p className="text-xs text-center py-4 text-text-tertiary">No purchase history</p>;
                 }
                 return (
                   <div className="space-y-2 max-h-48 overflow-y-auto">
                     {custSales.map(sale => (
-                      <div key={sale.id} className="flex items-center justify-between p-3 rounded-lg" style={{ background: 'var(--bg-primary)' }}>
+                      <div key={sale.id} className="flex items-center justify-between p-3 rounded-lg bg-bg-primary">
                         <div>
-                          <p className="text-xs font-semibold" style={{ color: 'var(--text-primary)' }}>{sale.invoiceNo}</p>
-                          <p className="text-[10px]" style={{ color: 'var(--text-tertiary)' }}>{formatDate(sale.date)} • {sale.paymentMode}</p>
+                          <p className="text-xs font-semibold text-text-primary">{sale.invoiceNo}</p>
+                          <p className="text-[10px] text-text-tertiary">{formatDate(sale.date)} • {sale.paymentMode}</p>
                         </div>
                         <span className="text-sm font-mono font-bold gold-text">{formatCurrency(sale.total)}</span>
                       </div>
@@ -317,7 +317,7 @@ export default function Customers() {
 
       {/* Delete Confirmation */}
       <Modal isOpen={!!deleteConfirm} onClose={() => setDeleteConfirm(null)} title="Confirm Delete" width="max-w-sm">
-        <p className="text-sm mb-4" style={{ color: 'var(--text-secondary)' }}>Are you sure you want to delete this customer?</p>
+        <p className="text-sm mb-4 text-text-secondary">Are you sure you want to delete this customer?</p>
         <div className="flex justify-end gap-3">
           <button className="btn btn-secondary btn-sm" onClick={() => setDeleteConfirm(null)}>Cancel</button>
           <button className="btn btn-danger btn-sm" onClick={() => handleDelete(deleteConfirm)}>Delete</button>

@@ -62,8 +62,8 @@ export default function Settings() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold" style={{ color: 'var(--text-primary)' }}>Settings</h1>
-        <p className="text-sm mt-1" style={{ color: 'var(--text-tertiary)' }}>Configure your store and system preferences</p>
+        <h1 className="text-2xl font-bold text-text-primary">Settings</h1>
+        <p className="text-sm mt-1 text-text-tertiary">Configure your store and system preferences</p>
       </div>
 
       <div className="flex gap-6">
@@ -90,7 +90,7 @@ export default function Settings() {
           {/* Store Info */}
           {activeTab === 'store' && (
             <div className="glass-card-static p-6 space-y-4">
-              <h3 className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>Store Information</h3>
+              <h3 className="text-lg font-bold text-text-primary">Store Information</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="form-label">Store Name (English)</label>
@@ -112,7 +112,7 @@ export default function Settings() {
                   <label className="form-label">Mobile</label>
                   <input type="text" className="form-input" value={storeInfo.mobile} onChange={e => setStoreInfo({ ...storeInfo, mobile: e.target.value })} />
                 </div>
-                <div>
+                <div className="md:col-span-2">
                   <label className="form-label">Email</label>
                   <input type="text" className="form-input" value={storeInfo.email} onChange={e => setStoreInfo({ ...storeInfo, email: e.target.value })} />
                 </div>
@@ -125,7 +125,7 @@ export default function Settings() {
                   <input type="text" className="form-input" value={storeInfo.vatNo} onChange={e => setStoreInfo({ ...storeInfo, vatNo: e.target.value })} />
                 </div>
               </div>
-              <div className="pt-3">
+              <div className="flex justify-end gap-3 mt-6 pt-4 border-t border-border-color-subtle">
                 <button className="btn btn-primary" onClick={saveStoreInfo}>
                   <Save size={14} /> Save Store Info
                 </button>
@@ -136,8 +136,8 @@ export default function Settings() {
           {/* Metal Rates */}
           {activeTab === 'rates' && (
             <div className="glass-card-static p-6 space-y-4">
-              <h3 className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>Metal Rates (per gram)</h3>
-              <p className="text-xs" style={{ color: 'var(--text-tertiary)' }}>Update current market rates. Changes will affect all price calculations.</p>
+              <h3 className="text-lg font-bold text-text-primary">Metal Rates (per gram)</h3>
+              <p className="text-xs text-text-tertiary">Update current market rates. Changes will affect all price calculations.</p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {[
                   { key: 'gold_24k', label: 'Gold 24K (Pure)', color: '#DAA520' },
@@ -151,7 +151,7 @@ export default function Settings() {
                   <div key={rate.key}>
                     <label className="form-label" style={{ color: rate.color }}>{rate.label}</label>
                     <div className="relative">
-                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-xs font-semibold" style={{ color: 'var(--text-tertiary)' }}>रू</span>
+                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-xs font-semibold text-text-tertiary">रू</span>
                       <input
                         type="number"
                         className="form-input pl-8 font-mono"
@@ -162,12 +162,12 @@ export default function Settings() {
                   </div>
                 ))}
               </div>
-              <div className="pt-3 flex gap-3">
-                <button className="btn btn-primary" onClick={saveRates}>
-                  <Save size={14} /> Save Rates
-                </button>
+              <div className="flex justify-end gap-3 mt-6 pt-4 border-t border-border-color-subtle">
                 <button className="btn btn-secondary" onClick={() => { setRates(METAL_RATES); addToast('Rates reset to defaults', 'info'); }}>
                   Reset to Default
+                </button>
+                <button className="btn btn-primary" onClick={saveRates}>
+                  <Save size={14} /> Save Rates
                 </button>
               </div>
             </div>
@@ -176,7 +176,7 @@ export default function Settings() {
           {/* Users */}
           {activeTab === 'users' && (
             <div className="glass-card-static p-6">
-              <h3 className="text-lg font-bold mb-4" style={{ color: 'var(--text-primary)' }}>User Roles & Permissions</h3>
+              <h3 className="text-lg font-bold mb-4 text-text-primary">User Roles & Permissions</h3>
               <div className="overflow-x-auto">
                 <table className="data-table">
                   <thead><tr><th>User</th><th>Role</th><th>Access</th><th>Status</th></tr></thead>
@@ -204,7 +204,7 @@ export default function Settings() {
           {/* Notifications */}
           {activeTab === 'notifications' && (
             <div className="glass-card-static p-6 space-y-4">
-              <h3 className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>Notification Settings</h3>
+              <h3 className="text-lg font-bold text-text-primary">Notification Settings</h3>
               <div className="space-y-3">
                 {[
                   { label: 'Low stock alerts', desc: 'Get notified when items fall below reorder point', enabled: true },
@@ -212,10 +212,10 @@ export default function Settings() {
                   { label: 'Customer birthdays', desc: 'Daily reminder for upcoming customer birthdays', enabled: false },
                   { label: 'Payment reminders', desc: 'Remind about outstanding customer balances', enabled: true },
                 ].map((notif, i) => (
-                  <div key={i} className="flex items-center justify-between p-4 rounded-xl" style={{ background: 'var(--bg-primary)' }}>
+                  <div key={i} className="flex items-center justify-between p-4 rounded-xl bg-bg-primary">
                     <div>
-                      <p className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>{notif.label}</p>
-                      <p className="text-xs" style={{ color: 'var(--text-tertiary)' }}>{notif.desc}</p>
+                      <p className="text-sm font-semibold text-text-primary">{notif.label}</p>
+                      <p className="text-xs text-text-tertiary">{notif.desc}</p>
                     </div>
                     <label className="relative inline-flex items-center cursor-pointer">
                       <input type="checkbox" defaultChecked={notif.enabled} className="sr-only peer" />
@@ -231,20 +231,20 @@ export default function Settings() {
           {/* Data */}
           {activeTab === 'backup' && (
             <div className="glass-card-static p-6 space-y-4">
-              <h3 className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>Data Management</h3>
+              <h3 className="text-lg font-bold text-text-primary">Data Management</h3>
 
-              <div className="p-4 rounded-xl flex items-center justify-between" style={{ background: 'var(--bg-primary)' }}>
+              <div className="p-4 rounded-xl flex items-center justify-between bg-bg-primary">
                 <div>
-                  <p className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>Theme</p>
-                  <p className="text-xs" style={{ color: 'var(--text-tertiary)' }}>Current: {theme === 'dark' ? 'Dark Mode 🌙' : 'Light Mode ☀️'}</p>
+                  <p className="text-sm font-semibold text-text-primary">Theme</p>
+                  <p className="text-xs text-text-tertiary">Current: {theme === 'dark' ? 'Dark Mode 🌙' : 'Light Mode ☀️'}</p>
                 </div>
                 <button className="btn btn-secondary btn-sm" onClick={toggleTheme}>Toggle Theme</button>
               </div>
 
-              <div className="p-4 rounded-xl flex items-center justify-between" style={{ background: 'var(--bg-primary)' }}>
+              <div className="p-4 rounded-xl flex items-center justify-between bg-bg-primary">
                 <div>
-                  <p className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>Export Backup</p>
-                  <p className="text-xs" style={{ color: 'var(--text-tertiary)' }}>Download all data as JSON</p>
+                  <p className="text-sm font-semibold text-text-primary">Export Backup</p>
+                  <p className="text-xs text-text-tertiary">Download all data as JSON</p>
                 </div>
                 <button className="btn btn-primary btn-sm" onClick={exportData}>Export</button>
               </div>
@@ -252,7 +252,7 @@ export default function Settings() {
               <div className="p-4 rounded-xl flex items-center justify-between" style={{ background: 'rgba(239,68,68,0.05)', border: '1px solid rgba(239,68,68,0.15)' }}>
                 <div>
                   <p className="text-sm font-semibold text-[#EF4444]">Reset All Data</p>
-                  <p className="text-xs" style={{ color: 'var(--text-tertiary)' }}>Reset to default sample data (cannot be undone)</p>
+                  <p className="text-xs text-text-tertiary">Reset to default sample data (cannot be undone)</p>
                 </div>
                 <button className="btn btn-danger btn-sm" onClick={resetData}>Reset</button>
               </div>

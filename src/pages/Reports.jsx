@@ -27,7 +27,7 @@ function CustomTooltip({ active, payload, label }) {
   if (active && payload && payload.length) {
     return (
       <div className="glass-card-static p-3 text-xs" style={{ minWidth: '140px' }}>
-        <p className="font-semibold mb-1" style={{ color: 'var(--text-primary)' }}>{label}</p>
+        <p className="font-semibold mb-1 text-text-primary">{label}</p>
         {payload.map((entry, i) => (
           <p key={i} style={{ color: entry.color }} className="font-mono">
             {formatCurrency(entry.value)}
@@ -155,8 +155,8 @@ export default function Reports() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold" style={{ color: 'var(--text-primary)' }}>Reports & Analytics</h1>
-          <p className="text-sm mt-1" style={{ color: 'var(--text-tertiary)' }}>Comprehensive business insights</p>
+          <h1 className="text-2xl font-bold text-text-primary">Reports & Analytics</h1>
+          <p className="text-sm mt-1 text-text-tertiary">Comprehensive business insights</p>
         </div>
         <button className="btn btn-secondary btn-sm" onClick={() => window.print()}>
           <Printer size={14} /> Print Report
@@ -189,7 +189,7 @@ export default function Reports() {
               { label: 'Avg Transaction', value: formatCurrency(salesReport.avgTransaction), color: '#8B5CF6' },
             ].map((stat, i) => (
               <div key={i} className="glass-card-static p-4">
-                <p className="text-[10px] font-bold uppercase tracking-wider" style={{ color: 'var(--text-tertiary)' }}>{stat.label}</p>
+                <p className="text-[10px] font-bold uppercase tracking-wider text-text-tertiary">{stat.label}</p>
                 <p className="text-xl font-bold font-mono mt-1" style={{ color: stat.color }}>{stat.value}</p>
               </div>
             ))}
@@ -197,7 +197,7 @@ export default function Reports() {
 
           <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
             <div className="glass-card-static p-5">
-              <h3 className="text-sm font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Daily Sales Trend</h3>
+              <h3 className="text-sm font-bold mb-4 text-text-primary">Daily Sales Trend</h3>
               <ResponsiveContainer width="100%" height={280}>
                 <AreaChart data={DAILY_SALES_DATA}>
                   <defs>
@@ -216,7 +216,7 @@ export default function Reports() {
             </div>
 
             <div className="glass-card-static p-5">
-              <h3 className="text-sm font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Payment Mode Distribution</h3>
+              <h3 className="text-sm font-bold mb-4 text-text-primary">Payment Mode Distribution</h3>
               <ResponsiveContainer width="100%" height={280}>
                 <PieChart>
                   <Pie data={salesReport.paymentData} cx="50%" cy="50%" innerRadius={55} outerRadius={90} paddingAngle={4} dataKey="value" stroke="none">
@@ -234,7 +234,7 @@ export default function Reports() {
           {/* Monthly Revenue */}
           <div className="glass-card-static p-5">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-sm font-bold" style={{ color: 'var(--text-primary)' }}>Monthly Revenue</h3>
+              <h3 className="text-sm font-bold text-text-primary">Monthly Revenue</h3>
               <button className="btn btn-secondary btn-sm" onClick={() => exportCSV(MONTHLY_SALES_DATA, 'monthly_sales')}>
                 <Download size={12} /> Export
               </button>
@@ -252,8 +252,8 @@ export default function Reports() {
 
           {/* Recent Sales Table */}
           <div className="glass-card-static overflow-hidden">
-            <div className="p-4 border-b flex items-center justify-between" style={{ borderColor: 'var(--border-color)' }}>
-              <h3 className="text-sm font-bold" style={{ color: 'var(--text-primary)' }}>Recent Transactions</h3>
+            <div className="p-4 border-b flex items-center justify-between border-border-color">
+              <h3 className="text-sm font-bold text-text-primary">Recent Transactions</h3>
             </div>
             <div className="overflow-x-auto">
               <table className="data-table">
@@ -292,15 +292,15 @@ export default function Reports() {
               { label: 'Low Stock Alerts', value: inventory.filter(i => i.quantity <= (i.reorderPoint || 3)).length, color: '#EF4444' },
             ].map((stat, i) => (
               <div key={i} className="glass-card-static p-4">
-                <p className="text-[10px] font-bold uppercase tracking-wider" style={{ color: 'var(--text-tertiary)' }}>{stat.label}</p>
+                <p className="text-[10px] font-bold uppercase tracking-wider text-text-tertiary">{stat.label}</p>
                 <p className="text-xl font-bold font-mono mt-1" style={{ color: stat.color }}>{stat.value}</p>
-                {stat.sub && <p className="text-xs mt-0.5" style={{ color: 'var(--text-tertiary)' }}>{stat.sub}</p>}
+                {stat.sub && <p className="text-xs mt-0.5 text-text-tertiary">{stat.sub}</p>}
               </div>
             ))}
           </div>
 
           <div className="glass-card-static p-5">
-            <h3 className="text-sm font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Metal Stock by Purity</h3>
+            <h3 className="text-sm font-bold mb-4 text-text-primary">Metal Stock by Purity</h3>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={stockReport.metalStockData} layout="vertical">
                 <CartesianGrid strokeDasharray="3 3" stroke="var(--border-color-subtle)" />
@@ -318,8 +318,8 @@ export default function Reports() {
 
           {/* Low stock items */}
           <div className="glass-card-static overflow-hidden">
-            <div className="p-4 border-b" style={{ borderColor: 'var(--border-color)' }}>
-              <h3 className="text-sm font-bold" style={{ color: 'var(--text-primary)' }}>Low Stock Items</h3>
+            <div className="p-4 border-b border-border-color">
+              <h3 className="text-sm font-bold text-text-primary">Low Stock Items</h3>
             </div>
             <div className="overflow-x-auto">
               <table className="data-table">
@@ -347,7 +347,7 @@ export default function Reports() {
         <div className="space-y-6">
           <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
             <div className="glass-card-static p-5">
-              <h3 className="text-sm font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Category Value Distribution</h3>
+              <h3 className="text-sm font-bold mb-4 text-text-primary">Category Value Distribution</h3>
               <ResponsiveContainer width="100%" height={300}>
                 <PieChart>
                   <Pie data={categoryReport} cx="50%" cy="50%" innerRadius={60} outerRadius={100} paddingAngle={4} dataKey="value" stroke="none">
@@ -362,7 +362,7 @@ export default function Reports() {
             </div>
 
             <div className="glass-card-static p-5">
-              <h3 className="text-sm font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Stock Quantity by Category</h3>
+              <h3 className="text-sm font-bold mb-4 text-text-primary">Stock Quantity by Category</h3>
               <ResponsiveContainer width="100%" height={300}>
                 <BarChart data={categoryReport}>
                   <CartesianGrid strokeDasharray="3 3" stroke="var(--border-color-subtle)" />
@@ -381,8 +381,8 @@ export default function Reports() {
 
           {/* Category Table */}
           <div className="glass-card-static overflow-hidden">
-            <div className="p-4 border-b flex items-center justify-between" style={{ borderColor: 'var(--border-color)' }}>
-              <h3 className="text-sm font-bold" style={{ color: 'var(--text-primary)' }}>Category Breakdown</h3>
+            <div className="p-4 border-b flex items-center justify-between border-border-color">
+              <h3 className="text-sm font-bold text-text-primary">Category Breakdown</h3>
               <button className="btn btn-secondary btn-sm" onClick={() => exportCSV(categoryReport.map(c => ({ Category: c.name, Quantity: c.qty, Weight: c.weight.toFixed(2), Value: c.value })), 'category_report')}>
                 <Download size={12} /> Export
               </button>
@@ -407,8 +407,8 @@ export default function Reports() {
           {/* Top Selling */}
           {topItems.length > 0 && (
             <div className="glass-card-static overflow-hidden">
-              <div className="p-4 border-b" style={{ borderColor: 'var(--border-color)' }}>
-                <h3 className="text-sm font-bold" style={{ color: 'var(--text-primary)' }}>Top Selling Items</h3>
+              <div className="p-4 border-b border-border-color">
+                <h3 className="text-sm font-bold text-text-primary">Top Selling Items</h3>
               </div>
               <div className="overflow-x-auto">
                 <table className="data-table">
@@ -416,7 +416,7 @@ export default function Reports() {
                   <tbody>
                     {topItems.map((item, i) => (
                       <tr key={i}>
-                        <td><span className="w-6 h-6 inline-flex items-center justify-center rounded-full text-[10px] font-bold" style={{ background: 'var(--bg-tertiary)' }}>{i + 1}</span></td>
+                        <td><span className="w-6 h-6 inline-flex items-center justify-center rounded-full text-[10px] font-bold bg-bg-tertiary">{i + 1}</span></td>
                         <td className="font-semibold text-sm">{item.name}</td>
                         <td className="font-mono">{item.qty}</td>
                         <td className="font-mono font-semibold gold-text">{formatCurrency(item.revenue)}</td>
@@ -434,8 +434,8 @@ export default function Reports() {
       {activeTab === 'customer' && (
         <div className="space-y-6">
           <div className="glass-card-static overflow-hidden">
-            <div className="p-4 border-b flex items-center justify-between" style={{ borderColor: 'var(--border-color)' }}>
-              <h3 className="text-sm font-bold" style={{ color: 'var(--text-primary)' }}>Customer Purchase Report</h3>
+            <div className="p-4 border-b flex items-center justify-between border-border-color">
+              <h3 className="text-sm font-bold text-text-primary">Customer Purchase Report</h3>
               <button className="btn btn-secondary btn-sm" onClick={() => exportCSV(customerReport.map(c => ({ Name: c.name, Phone: c.phone, Transactions: c.salesCount, TotalSpent: c.totalSpent, Outstanding: c.outstandingBalance, LoyaltyPoints: c.loyaltyPoints })), 'customer_report')}>
                 <Download size={12} /> Export
               </button>
@@ -472,14 +472,14 @@ export default function Reports() {
               { label: 'Transactions', value: vatSummary.transactionCount, color: '#8B5CF6' },
             ].map((stat, i) => (
               <div key={i} className="glass-card-static p-4">
-                <p className="text-[10px] font-bold uppercase tracking-wider" style={{ color: 'var(--text-tertiary)' }}>{stat.label}</p>
+                <p className="text-[10px] font-bold uppercase tracking-wider text-text-tertiary">{stat.label}</p>
                 <p className="text-xl font-bold font-mono mt-1" style={{ color: stat.color }}>{stat.value}</p>
               </div>
             ))}
           </div>
 
           <div className="glass-card-static p-6">
-            <h3 className="text-lg font-bold mb-4" style={{ color: 'var(--text-primary)' }}>VAT Summary Report</h3>
+            <h3 className="text-lg font-bold mb-4 text-text-primary">VAT Summary Report</h3>
             <div className="space-y-3">
               {[
                 ['Gross Sales (before discount)', formatCurrency(sales.reduce((s, sale) => s + sale.subtotal, 0))],
@@ -490,7 +490,7 @@ export default function Reports() {
               ].map(([label, val], i) => (
                 <div key={i} className={`flex justify-between p-3 rounded-lg ${i === 4 ? 'font-bold text-lg' : 'text-sm'}`}
                   style={{ background: i === 4 ? 'rgba(218,165,32,0.08)' : 'var(--bg-primary)', border: i === 4 ? '1px solid rgba(218,165,32,0.2)' : 'none' }}>
-                  <span style={{ color: 'var(--text-secondary)' }}>{label}</span>
+                  <span className="text-text-secondary">{label}</span>
                   <span className="font-mono" style={{ color: i === 4 ? '#DAA520' : 'var(--text-primary)' }}>{val}</span>
                 </div>
               ))}

@@ -15,7 +15,7 @@ const CHART_COLORS = ['#DAA520', '#10B981', '#3B82F6', '#8B5CF6', '#EF4444', '#F
 
 function KPICard({ icon: Icon, label, value, subValue, trend, trendUp, color, delay }) {
   return (
-    <div className={`glass-card p-5 animate-fade-in animate-fade-in-delay-${delay}`}>
+    <div className={`glass-card p-5 animate-fade-in animate-fade-in-delay-${delay} border border-border-subtle hover:border-border-primary transition-all duration-200`}>
       <div className="flex items-start justify-between mb-3">
         <div
           className="w-11 h-11 rounded-xl flex items-center justify-center"
@@ -31,9 +31,9 @@ function KPICard({ icon: Icon, label, value, subValue, trend, trendUp, color, de
           </div>
         )}
       </div>
-      <p className="text-[11px] font-semibold uppercase tracking-wider mb-1" style={{ color: 'var(--text-tertiary)' }}>{label}</p>
-      <p className="text-2xl font-bold font-mono" style={{ color: 'var(--text-primary)' }}>{value}</p>
-      {subValue && <p className="text-xs mt-1" style={{ color: 'var(--text-tertiary)' }}>{subValue}</p>}
+      <p className="text-[11px] font-semibold uppercase tracking-wider mb-1 text-text-tertiary">{label}</p>
+      <p className="text-2xl font-bold font-mono text-text-primary">{value}</p>
+      {subValue && <p className="text-xs mt-1 text-text-tertiary">{subValue}</p>}
     </div>
   );
 }
@@ -41,8 +41,8 @@ function KPICard({ icon: Icon, label, value, subValue, trend, trendUp, color, de
 function CustomTooltip({ active, payload, label }) {
   if (active && payload && payload.length) {
     return (
-      <div className="glass-card-static p-3 text-xs" style={{ minWidth: '140px' }}>
-        <p className="font-semibold mb-1" style={{ color: 'var(--text-primary)' }}>{label}</p>
+      <div className="glass-card-static p-3 text-xs bg-bg-card border border-border-primary rounded-xl shadow-lg" style={{ minWidth: '140px' }}>
+        <p className="font-semibold mb-1 text-text-primary">{label}</p>
         {payload.map((entry, i) => (
           <p key={i} style={{ color: entry.color }} className="font-mono">
             {formatCurrency(entry.value)}
@@ -124,14 +124,14 @@ export default function Dashboard() {
       {/* Page Title */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold" style={{ color: 'var(--text-primary)' }}>Dashboard</h1>
-          <p className="text-sm mt-1" style={{ color: 'var(--text-tertiary)' }}>
+          <h1 className="text-2xl font-bold text-text-primary">Dashboard</h1>
+          <p className="text-sm mt-1 text-text-tertiary">
             Welcome back! Here's what's happening today.
           </p>
         </div>
         <div className="flex items-center gap-2 px-4 py-2 rounded-xl" style={{ background: 'var(--bg-card)', border: '1px solid var(--border-color-subtle)' }}>
-          <Clock size={14} style={{ color: 'var(--text-tertiary)' }} />
-          <span className="text-xs font-mono" style={{ color: 'var(--text-secondary)' }}>
+          <Clock size={14} className="text-text-tertiary" />
+          <span className="text-xs font-mono text-text-secondary">
             {new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
           </span>
         </div>
@@ -157,7 +157,7 @@ export default function Dashboard() {
         {/* Sales Trend */}
         <div className="xl:col-span-2 glass-card-static p-5">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-sm font-bold" style={{ color: 'var(--text-primary)' }}>Sales Trend (7 Days)</h3>
+            <h3 className="text-sm font-bold text-text-primary">Sales Trend (7 Days)</h3>
             <span className="badge badge-gold">Daily</span>
           </div>
           <ResponsiveContainer width="100%" height={280}>
@@ -179,7 +179,7 @@ export default function Dashboard() {
 
         {/* Category Distribution */}
         <div className="glass-card-static p-5">
-          <h3 className="text-sm font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Stock by Category</h3>
+          <h3 className="text-sm font-bold mb-4 text-text-primary">Stock by Category</h3>
           <ResponsiveContainer width="100%" height={280}>
             <PieChart>
               <Pie data={categoryData} cx="50%" cy="50%" innerRadius={60} outerRadius={95} paddingAngle={4} dataKey="value" stroke="none">
@@ -199,7 +199,7 @@ export default function Dashboard() {
         {/* Monthly Revenue */}
         <div className="xl:col-span-2 glass-card-static p-5">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-sm font-bold" style={{ color: 'var(--text-primary)' }}>Monthly Revenue</h3>
+            <h3 className="text-sm font-bold text-text-primary">Monthly Revenue</h3>
             <span className="badge badge-emerald">This Year</span>
           </div>
           <ResponsiveContainer width="100%" height={260}>
@@ -219,7 +219,7 @@ export default function Dashboard() {
 
         {/* Recent Activity */}
         <div className="glass-card-static p-5">
-          <h3 className="text-sm font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Recent Activity</h3>
+          <h3 className="text-sm font-bold mb-4 text-text-primary">Recent Activity</h3>
           <div className="space-y-3">
             {recentActivity.map((activity) => (
               <div key={activity.id} className="flex items-center gap-3 p-3 rounded-xl transition-colors hover:bg-[var(--bg-tertiary)]">
@@ -228,12 +228,12 @@ export default function Dashboard() {
                   <activity.icon size={16} style={{ color: activity.color }} />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-xs font-semibold truncate" style={{ color: 'var(--text-primary)' }}>{activity.title}</p>
-                  <p className="text-[10px]" style={{ color: 'var(--text-tertiary)' }}>{activity.subtitle}</p>
+                  <p className="text-xs font-semibold truncate text-text-primary">{activity.title}</p>
+                  <p className="text-[10px] text-text-tertiary">{activity.subtitle}</p>
                 </div>
                 <div className="text-right">
                   <p className="text-xs font-mono font-semibold" style={{ color: activity.color }}>{activity.value}</p>
-                  <p className="text-[10px]" style={{ color: 'var(--text-tertiary)' }}>{activity.time}</p>
+                  <p className="text-[10px] text-text-tertiary">{activity.time}</p>
                 </div>
               </div>
             ))}
@@ -250,7 +250,7 @@ export default function Dashboard() {
           { label: 'Outstanding Balance', value: formatCurrency(customers.reduce((s, c) => s + c.outstandingBalance, 0)), color: '#EF4444' },
         ].map((stat, i) => (
           <div key={i} className="glass-card-static p-4 text-center">
-            <p className="text-[10px] font-bold uppercase tracking-wider" style={{ color: 'var(--text-tertiary)' }}>{stat.label}</p>
+            <p className="text-[10px] font-bold uppercase tracking-wider text-text-tertiary">{stat.label}</p>
             <p className="text-lg font-bold font-mono mt-1" style={{ color: stat.color }}>{stat.value}</p>
           </div>
         ))}

@@ -8,8 +8,8 @@ export default function Purchases() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold" style={{ color: 'var(--text-primary)' }}>Purchases & Suppliers</h1>
-        <p className="text-sm mt-1" style={{ color: 'var(--text-tertiary)' }}>Manage supplier relationships and purchase orders</p>
+        <h1 className="text-2xl font-bold text-text-primary">Purchases & Suppliers</h1>
+        <p className="text-sm mt-1 text-text-tertiary">Manage supplier relationships and purchase orders</p>
       </div>
 
       {/* Supplier Cards */}
@@ -21,17 +21,17 @@ export default function Purchases() {
                 <Building size={20} style={{ color: '#DAA520' }} />
               </div>
               <div>
-                <h3 className="text-sm font-bold" style={{ color: 'var(--text-primary)' }}>{supplier.name}</h3>
+                <h3 className="text-sm font-bold text-text-primary">{supplier.name}</h3>
                 <span className="badge badge-gold text-[9px]">{supplier.type}</span>
               </div>
             </div>
-            <div className="space-y-2 text-xs" style={{ color: 'var(--text-secondary)' }}>
+            <div className="space-y-2 text-xs text-text-secondary">
               <p className="flex items-center gap-2"><Phone size={12} /> {supplier.phone}</p>
               <p className="flex items-center gap-2"><Mail size={12} /> {supplier.email}</p>
               <p className="flex items-center gap-2"><Truck size={12} /> {supplier.address}</p>
             </div>
-            <div className="mt-4 pt-3 border-t flex justify-between items-center" style={{ borderColor: 'var(--border-color-subtle)' }}>
-              <span className="text-xs" style={{ color: 'var(--text-tertiary)' }}>Outstanding</span>
+            <div className="mt-4 pt-3 border-t flex justify-between items-center border-border-color-subtle">
+              <span className="text-xs text-text-tertiary">Outstanding</span>
               <span className={`font-mono font-bold text-sm ${supplier.balance > 0 ? 'text-[#EF4444]' : 'text-[#10B981]'}`}>
                 {formatCurrency(supplier.balance)}
               </span>
@@ -42,9 +42,9 @@ export default function Purchases() {
 
       {/* Coming Soon */}
       <div className="glass-card-static p-8 text-center">
-        <Truck size={48} className="mx-auto mb-3" style={{ color: 'var(--text-tertiary)' }} />
-        <h3 className="text-lg font-bold mb-2" style={{ color: 'var(--text-primary)' }}>Purchase Orders</h3>
-        <p className="text-sm" style={{ color: 'var(--text-tertiary)' }}>
+        <Truck size={48} className="mx-auto mb-3 text-text-tertiary" />
+        <h3 className="text-lg font-bold mb-2 text-text-primary">Purchase Orders</h3>
+        <p className="text-sm text-text-tertiary">
           Purchase order management, consignment tracking, and supplier ledger coming in the next update.
         </p>
       </div>

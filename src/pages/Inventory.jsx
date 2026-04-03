@@ -138,8 +138,8 @@ export default function Inventory() {
       {/* Header */}
       <div className="flex items-center justify-between flex-wrap gap-4">
         <div>
-          <h1 className="text-2xl font-bold" style={{ color: 'var(--text-primary)' }}>Inventory Management</h1>
-          <p className="text-sm mt-1" style={{ color: 'var(--text-tertiary)' }}>
+          <h1 className="text-2xl font-bold text-text-primary">Inventory Management</h1>
+          <p className="text-sm mt-1 text-text-tertiary">
             {inventory.length} items • {inventory.reduce((s, i) => s + i.quantity, 0)} total pieces
           </p>
         </div>
@@ -150,8 +150,8 @@ export default function Inventory() {
               <span className="text-xs font-semibold text-[#EF4444]">{lowStockCount} Low Stock</span>
             </div>
           )}
-          <button className="btn btn-secondary btn-sm" onClick={exportCSV}>
-            <Download size={14} /> Export
+          <button className="btn btn-secondary" onClick={exportCSV}>
+            <Download size={16} /> Export
           </button>
           <button className="btn btn-primary" onClick={openAddModal}>
             <Plus size={16} /> Add Item
@@ -163,7 +163,7 @@ export default function Inventory() {
       <div className="glass-card-static p-4">
         <div className="flex flex-wrap items-center gap-3">
           <div className="relative flex-1 min-w-[200px]">
-            <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: 'var(--text-tertiary)' }} />
+            <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-text-tertiary" />
             <input
               type="text"
               placeholder="Search by name or SKU..."
@@ -216,20 +216,20 @@ export default function Inventory() {
                 const isLow = item.quantity <= (item.reorderPoint || 3);
                 return (
                   <tr key={item.id}>
-                    <td><span className="font-mono text-xs" style={{ color: 'var(--text-tertiary)' }}>{item.sku}</span></td>
+                    <td><span className="font-mono text-xs text-text-tertiary">{item.sku}</span></td>
                     <td>
                       <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 rounded-lg flex items-center justify-center text-sm" style={{ background: 'var(--bg-tertiary)' }}>
+                        <div className="w-8 h-8 rounded-lg flex items-center justify-center text-sm bg-bg-tertiary">
                           {CATEGORIES.find(c => c.id === item.category)?.icon || '💎'}
                         </div>
-                        <span className="font-semibold text-sm" style={{ color: 'var(--text-primary)' }}>{item.name}</span>
+                        <span className="font-semibold text-sm text-text-primary">{item.name}</span>
                       </div>
                     </td>
                     <td className="text-xs capitalize">{item.category}</td>
                     <td>
                       <div>
                         <span className="text-xs font-semibold capitalize" style={{ color: item.metalType === 'gold' ? '#DAA520' : item.metalType === 'silver' ? '#C0C0C0' : '#B0C4DE' }}>{item.metalType}</span>
-                        <span className="text-[10px] ml-1" style={{ color: 'var(--text-tertiary)' }}>{item.purity}</span>
+                        <span className="text-[10px] ml-1 text-text-tertiary">{item.purity}</span>
                       </div>
                     </td>
                     <td><span className="font-mono text-sm">{formatWeight(item.netWeight)}</span></td>
@@ -246,13 +246,13 @@ export default function Inventory() {
                     </td>
                     <td>
                       <div className="flex items-center gap-1">
-                        <button onClick={() => openDetailModal(item)} className="btn btn-ghost btn-sm p-1.5" title="View">
+                        <button onClick={() => openDetailModal(item)} className="p-1.5 rounded-lg text-text-tertiary hover:bg-bg-tertiary hover:text-text-primary transition-colors" title="View">
                           <Eye size={14} />
                         </button>
-                        <button onClick={() => openEditModal(item)} className="btn btn-ghost btn-sm p-1.5" title="Edit">
+                        <button onClick={() => openEditModal(item)} className="p-1.5 rounded-lg text-text-tertiary hover:bg-bg-tertiary hover:text-text-primary transition-colors" title="Edit">
                           <Edit3 size={14} />
                         </button>
-                        <button onClick={() => setDeleteConfirm(item.id)} className="btn btn-ghost btn-sm p-1.5 text-[#EF4444]" title="Delete">
+                        <button onClick={() => setDeleteConfirm(item.id)} className="p-1.5 rounded-lg text-text-tertiary hover:bg-bg-tertiary hover:text-text-primary transition-colors" title="Delete">
                           <Trash2 size={14} />
                         </button>
                       </div>
@@ -263,8 +263,8 @@ export default function Inventory() {
               {filteredItems.length === 0 && (
                 <tr>
                   <td colSpan={9} className="text-center py-12">
-                    <Package size={40} className="mx-auto mb-3" style={{ color: 'var(--text-tertiary)' }} />
-                    <p className="text-sm" style={{ color: 'var(--text-tertiary)' }}>No items found</p>
+                    <Package size={40} className="mx-auto mb-3 text-text-tertiary" />
+                    <p className="text-sm text-text-tertiary">No items found</p>
                   </td>
                 </tr>
               )}
@@ -348,26 +348,26 @@ export default function Inventory() {
           <div className="flex items-center gap-3">
             <label className="flex items-center gap-2 cursor-pointer">
               <input type="checkbox" checked={form.hallmarked} onChange={e => setForm({ ...form, hallmarked: e.target.checked })} className="w-4 h-4 rounded accent-[#DAA520]" />
-              <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>Hallmarked</span>
+              <span className="text-sm text-text-secondary">Hallmarked</span>
             </label>
           </div>
 
           {/* Price Preview */}
           {form.netWeight && (
             <div className="md:col-span-2 p-4 rounded-xl" style={{ background: 'var(--bg-primary)', border: '1px solid var(--border-color)' }}>
-              <h4 className="text-xs font-bold uppercase tracking-wider mb-3" style={{ color: 'var(--text-tertiary)' }}>Price Breakdown</h4>
+              <h4 className="text-xs font-bold uppercase tracking-wider mb-3 text-text-tertiary">Price Breakdown</h4>
               {(() => {
                 const p = calculateItemPrice({ ...form, netWeight: parseFloat(form.netWeight) || 0 });
                 return (
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
-                    <div><span className="text-xs block" style={{ color: 'var(--text-tertiary)' }}>Metal Value</span><span className="font-mono font-semibold">{formatCurrency(p.metalValue)}</span></div>
-                    <div><span className="text-xs block" style={{ color: 'var(--text-tertiary)' }}>Wastage</span><span className="font-mono">{formatCurrency(p.wastageValue)}</span></div>
-                    <div><span className="text-xs block" style={{ color: 'var(--text-tertiary)' }}>Making</span><span className="font-mono">{formatCurrency(p.makingChargeValue)}</span></div>
-                    <div><span className="text-xs block" style={{ color: 'var(--text-tertiary)' }}>Stone</span><span className="font-mono">{formatCurrency(p.stoneValue)}</span></div>
-                    <div><span className="text-xs block" style={{ color: 'var(--text-tertiary)' }}>Hallmark</span><span className="font-mono">{formatCurrency(p.hallmarkingCharge)}</span></div>
-                    <div><span className="text-xs block" style={{ color: 'var(--text-tertiary)' }}>VAT (13%)</span><span className="font-mono">{formatCurrency(p.vat)}</span></div>
+                    <div><span className="text-xs block text-text-tertiary">Metal Value</span><span className="font-mono font-semibold">{formatCurrency(p.metalValue)}</span></div>
+                    <div><span className="text-xs block text-text-tertiary">Wastage</span><span className="font-mono">{formatCurrency(p.wastageValue)}</span></div>
+                    <div><span className="text-xs block text-text-tertiary">Making</span><span className="font-mono">{formatCurrency(p.makingChargeValue)}</span></div>
+                    <div><span className="text-xs block text-text-tertiary">Stone</span><span className="font-mono">{formatCurrency(p.stoneValue)}</span></div>
+                    <div><span className="text-xs block text-text-tertiary">Hallmark</span><span className="font-mono">{formatCurrency(p.hallmarkingCharge)}</span></div>
+                    <div><span className="text-xs block text-text-tertiary">VAT (13%)</span><span className="font-mono">{formatCurrency(p.vat)}</span></div>
                     <div className="md:col-span-2">
-                      <span className="text-xs block" style={{ color: 'var(--text-tertiary)' }}>Total Price</span>
+                      <span className="text-xs block text-text-tertiary">Total Price</span>
                       <span className="font-mono text-xl font-bold gold-text">{formatCurrency(p.total)}</span>
                     </div>
                   </div>
@@ -377,7 +377,7 @@ export default function Inventory() {
           )}
         </div>
 
-        <div className="flex justify-end gap-3 mt-6 pt-4 border-t" style={{ borderColor: 'var(--border-color-subtle)' }}>
+        <div className="flex justify-end gap-3 mt-6 pt-4 border-t border-border-color-subtle">
           <button className="btn btn-secondary" onClick={() => setShowModal(false)}>Cancel</button>
           <button className="btn btn-primary" onClick={handleSave}>{editItem ? 'Update' : 'Add Item'}</button>
         </div>
@@ -390,12 +390,12 @@ export default function Inventory() {
           return (
             <div className="space-y-4">
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 rounded-xl flex items-center justify-center text-xl" style={{ background: 'var(--bg-tertiary)' }}>
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center text-xl bg-bg-tertiary">
                   {CATEGORIES.find(c => c.id === detailItem.category)?.icon || '💎'}
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>{detailItem.name}</h3>
-                  <p className="text-xs font-mono" style={{ color: 'var(--text-tertiary)' }}>{detailItem.sku}</p>
+                  <h3 className="text-lg font-bold text-text-primary">{detailItem.name}</h3>
+                  <p className="text-xs font-mono text-text-tertiary">{detailItem.sku}</p>
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-3">
@@ -409,14 +409,14 @@ export default function Inventory() {
                   ['Quantity', detailItem.quantity],
                   ['Hallmarked', detailItem.hallmarked ? 'Yes ✓' : 'No'],
                 ].map(([label, val]) => (
-                  <div key={label} className="p-3 rounded-lg" style={{ background: 'var(--bg-primary)' }}>
-                    <span className="text-[10px] uppercase font-bold block" style={{ color: 'var(--text-tertiary)' }}>{label}</span>
-                    <span className="text-sm font-semibold capitalize" style={{ color: 'var(--text-primary)' }}>{val}</span>
+                  <div key={label} className="p-3 rounded-lg bg-bg-primary">
+                    <span className="text-[10px] uppercase font-bold block text-text-tertiary">{label}</span>
+                    <span className="text-sm font-semibold capitalize text-text-primary">{val}</span>
                   </div>
                 ))}
               </div>
               <div className="p-4 rounded-xl text-center" style={{ background: 'rgba(218,165,32,0.05)', border: '1px solid rgba(218,165,32,0.15)' }}>
-                <span className="text-xs uppercase font-bold block" style={{ color: 'var(--text-tertiary)' }}>Total Price (incl. 13% VAT)</span>
+                <span className="text-xs uppercase font-bold block text-text-tertiary">Total Price (incl. 13% VAT)</span>
                 <span className="text-2xl font-bold font-mono gold-text">{formatCurrency(p.total)}</span>
               </div>
             </div>
@@ -426,7 +426,7 @@ export default function Inventory() {
 
       {/* Delete Confirmation */}
       <Modal isOpen={!!deleteConfirm} onClose={() => setDeleteConfirm(null)} title="Confirm Delete" width="max-w-sm">
-        <p className="text-sm mb-4" style={{ color: 'var(--text-secondary)' }}>Are you sure you want to delete this item? This action cannot be undone.</p>
+        <p className="text-sm mb-4 text-text-secondary">Are you sure you want to delete this item? This action cannot be undone.</p>
         <div className="flex justify-end gap-3">
           <button className="btn btn-secondary btn-sm" onClick={() => setDeleteConfirm(null)}>Cancel</button>
           <button className="btn btn-danger btn-sm" onClick={() => handleDelete(deleteConfirm)}>Delete</button>

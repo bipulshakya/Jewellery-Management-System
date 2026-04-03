@@ -22,8 +22,8 @@ export default function Orders() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold" style={{ color: 'var(--text-primary)' }}>Orders & Production</h1>
-        <p className="text-sm mt-1" style={{ color: 'var(--text-tertiary)' }}>Custom order and karigar job tracking</p>
+        <h1 className="text-2xl font-bold text-text-primary">Orders & Production</h1>
+        <p className="text-sm mt-1 text-text-tertiary">Custom order and karigar job tracking</p>
       </div>
 
       {/* Status Overview */}
@@ -37,7 +37,7 @@ export default function Orders() {
           <div key={i} className="glass-card-static p-4">
             <div className="flex items-center gap-2 mb-2">
               <stat.icon size={16} style={{ color: stat.color }} />
-              <p className="text-[10px] font-bold uppercase tracking-wider" style={{ color: 'var(--text-tertiary)' }}>{stat.label}</p>
+              <p className="text-[10px] font-bold uppercase tracking-wider text-text-tertiary">{stat.label}</p>
             </div>
             <p className="text-2xl font-bold font-mono" style={{ color: stat.color }}>{stat.value}</p>
           </div>
@@ -50,8 +50,8 @@ export default function Orders() {
           <div key={order.id} className="glass-card-static p-5">
             <div className="flex items-start justify-between mb-3">
               <div>
-                <h3 className="text-sm font-bold" style={{ color: 'var(--text-primary)' }}>{order.description}</h3>
-                <p className="text-xs mt-0.5" style={{ color: 'var(--text-tertiary)' }}>
+                <h3 className="text-sm font-bold text-text-primary">{order.description}</h3>
+                <p className="text-xs mt-0.5 text-text-tertiary">
                   Customer: {getCustomerName(order.customer)} • Karigar: {order.karigar || 'Unassigned'}
                 </p>
               </div>
@@ -66,9 +66,9 @@ export default function Orders() {
                 ['Returned', formatWeight(order.metalReturned)],
                 ['Advance', formatCurrency(order.advance)],
               ].map(([label, val]) => (
-                <div key={label} className="p-2 rounded-lg" style={{ background: 'var(--bg-primary)' }}>
-                  <p className="text-[10px] uppercase font-bold" style={{ color: 'var(--text-tertiary)' }}>{label}</p>
-                  <p className="text-xs font-semibold capitalize" style={{ color: 'var(--text-primary)' }}>{val}</p>
+                <div key={label} className="p-2 rounded-lg bg-bg-primary">
+                  <p className="text-[10px] uppercase font-bold text-text-tertiary">{label}</p>
+                  <p className="text-xs font-semibold capitalize text-text-primary">{val}</p>
                 </div>
               ))}
             </div>
@@ -89,13 +89,13 @@ export default function Orders() {
                 );
               })}
             </div>
-            <div className="flex justify-between mt-1 text-[9px] uppercase tracking-wider" style={{ color: 'var(--text-tertiary)' }}>
+            <div className="flex justify-between mt-1 text-[9px] uppercase tracking-wider text-text-tertiary">
               {STAGES.map(s => <span key={s} className={STAGES.indexOf(s) <= STAGES.indexOf(order.stage) ? 'gold-text font-bold' : ''}>{s.replace('_', ' ')}</span>)}
             </div>
 
-            <div className="flex items-center justify-between mt-3 pt-3 border-t" style={{ borderColor: 'var(--border-color-subtle)' }}>
-              <span className="text-xs" style={{ color: 'var(--text-tertiary)' }}>Started: {formatDate(order.startDate)}</span>
-              <span className="text-xs" style={{ color: 'var(--text-tertiary)' }}>Expected: {formatDate(order.expectedDate)}</span>
+            <div className="flex items-center justify-between mt-3 pt-3 border-t border-border-color-subtle">
+              <span className="text-xs text-text-tertiary">Started: {formatDate(order.startDate)}</span>
+              <span className="text-xs text-text-tertiary">Expected: {formatDate(order.expectedDate)}</span>
             </div>
           </div>
         ))}

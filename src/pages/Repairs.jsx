@@ -22,8 +22,8 @@ export default function Repairs() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold" style={{ color: 'var(--text-primary)' }}>Repair & Service</h1>
-        <p className="text-sm mt-1" style={{ color: 'var(--text-tertiary)' }}>Track repair jobs and service requests</p>
+        <h1 className="text-2xl font-bold text-text-primary">Repair & Service</h1>
+        <p className="text-sm mt-1 text-text-tertiary">Track repair jobs and service requests</p>
       </div>
 
       {/* Stats */}
@@ -35,7 +35,7 @@ export default function Repairs() {
           { label: 'Completed', value: counts.completed, color: '#10B981' },
         ].map((stat, i) => (
           <div key={i} className="glass-card-static p-4">
-            <p className="text-[10px] font-bold uppercase tracking-wider" style={{ color: 'var(--text-tertiary)' }}>{stat.label}</p>
+            <p className="text-[10px] font-bold uppercase tracking-wider text-text-tertiary">{stat.label}</p>
             <p className="text-2xl font-bold font-mono mt-1" style={{ color: stat.color }}>{stat.value}</p>
           </div>
         ))}
@@ -65,8 +65,8 @@ export default function Repairs() {
                   <Wrench size={16} style={{ color: '#DAA520' }} />
                 </div>
                 <div>
-                  <h3 className="text-sm font-bold" style={{ color: 'var(--text-primary)' }}>{repair.itemDescription}</h3>
-                  <p className="text-[10px] flex items-center gap-1" style={{ color: 'var(--text-tertiary)' }}>
+                  <h3 className="text-sm font-bold text-text-primary">{repair.itemDescription}</h3>
+                  <p className="text-[10px] flex items-center gap-1 text-text-tertiary">
                     <User size={9} /> {getCustomerName(repair.customer)}
                   </p>
                 </div>
@@ -79,12 +79,12 @@ export default function Repairs() {
             </p>
 
             <div className="grid grid-cols-2 gap-2 text-xs">
-              <div className="p-2 rounded-lg" style={{ background: 'var(--bg-primary)' }}>
-                <span className="text-[9px] uppercase font-bold block" style={{ color: 'var(--text-tertiary)' }}>Estimated</span>
+              <div className="p-2 rounded-lg bg-bg-primary">
+                <span className="text-[9px] uppercase font-bold block text-text-tertiary">Estimated</span>
                 <span className="font-mono font-semibold" style={{ color: '#DAA520' }}>{formatCurrency(repair.estimatedCost)}</span>
               </div>
-              <div className="p-2 rounded-lg" style={{ background: 'var(--bg-primary)' }}>
-                <span className="text-[9px] uppercase font-bold block" style={{ color: 'var(--text-tertiary)' }}>Actual</span>
+              <div className="p-2 rounded-lg bg-bg-primary">
+                <span className="text-[9px] uppercase font-bold block text-text-tertiary">Actual</span>
                 <span className="font-mono font-semibold" style={{ color: repair.actualCost ? '#10B981' : 'var(--text-tertiary)' }}>
                   {repair.actualCost ? formatCurrency(repair.actualCost) : 'TBD'}
                 </span>

@@ -1,16 +1,62 @@
-# React + Vite
+# Jewellery Management System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern ERP + POS web application for jewellery businesses, built with React and Vite.
 
-Currently, two official plugins are available:
+## About
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Jewellery retail operations are more complex than normal retail: pricing depends on metal type, purity, live rates, net/gross weight, stone value, making charges, wastage, and tax rules. This project is designed to digitize those workflows in one place with a fast and clear UI.
 
-## React Compiler
+The system helps store owners and staff run day-to-day operations with less manual calculation and better visibility across sales, stock, customer history, custom orders, and repairs.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### What This Project Covers
 
-## Expanding the ESLint configuration
+- Dashboard insights for sales, stock, and activity
+- Inventory management with SKU, purity, weight, and pricing calculations
+- POS billing with discount handling and old-gold exchange support
+- Customer profiles with purchase context and outstanding balances
+- Orders and repairs tracking for workshop/service operations
+- Reports and accounting views for business decisions
+- Settings for store profile and metal rate updates
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### UI/UX Focus
+
+- Responsive layouts for desktop and tablet workflows
+- Consistent button sizing and action alignment
+- Clear visual hierarchy with glass-card panels and status badges
+- Theme support (dark/light) through CSS variables and utility classes
+- Faster readability for dense operational screens (tables, forms, totals)
+
+## Tech Stack
+
+- React 19
+- Vite 8
+- Tailwind CSS 4
+- Recharts
+- Lucide React
+- date-fns
+
+## Getting Started
+
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+2. Start development server:
+
+```bash
+npm run dev
+```
+
+3. Build for production:
+
+```bash
+npm run build
+```
+
+4. Preview production build:
+
+```bash
+npm run preview
+```

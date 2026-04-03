@@ -15,8 +15,8 @@ export default function Accounting() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold" style={{ color: 'var(--text-primary)' }}>Accounting & Finance</h1>
-        <p className="text-sm mt-1" style={{ color: 'var(--text-tertiary)' }}>Financial overview and ledger management</p>
+        <h1 className="text-2xl font-bold text-text-primary">Accounting & Finance</h1>
+        <p className="text-sm mt-1 text-text-tertiary">Financial overview and ledger management</p>
       </div>
 
       {/* Quick Stats */}
@@ -33,7 +33,7 @@ export default function Accounting() {
                 <stat.icon size={18} style={{ color: stat.color }} />
               </div>
             </div>
-            <p className="text-[10px] font-bold uppercase tracking-wider" style={{ color: 'var(--text-tertiary)' }}>{stat.label}</p>
+            <p className="text-[10px] font-bold uppercase tracking-wider text-text-tertiary">{stat.label}</p>
             <p className="text-xl font-bold font-mono mt-1" style={{ color: stat.color }}>{stat.value}</p>
           </div>
         ))}
@@ -48,9 +48,9 @@ export default function Accounting() {
           { title: 'P&L Statement', desc: 'Profit and loss statement with revenue, cost of goods sold, and expense tracking.' },
         ].map((section, i) => (
           <div key={i} className="glass-card-static p-6 text-center">
-            <Calculator size={32} className="mx-auto mb-3" style={{ color: 'var(--text-tertiary)' }} />
-            <h3 className="text-sm font-bold mb-2" style={{ color: 'var(--text-primary)' }}>{section.title}</h3>
-            <p className="text-xs" style={{ color: 'var(--text-tertiary)' }}>{section.desc}</p>
+            <Calculator size={32} className="mx-auto mb-3 text-text-tertiary" />
+            <h3 className="text-sm font-bold mb-2 text-text-primary">{section.title}</h3>
+            <p className="text-xs text-text-tertiary">{section.desc}</p>
             <div className="mt-3">
               <span className="badge badge-gold">Coming Soon</span>
             </div>

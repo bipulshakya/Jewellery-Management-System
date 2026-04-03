@@ -186,13 +186,13 @@ export default function POS() {
       {/* Left: Item Search & Selection */}
       <div className="flex-1 flex flex-col space-y-4 overflow-hidden">
         <div>
-          <h1 className="text-2xl font-bold" style={{ color: 'var(--text-primary)' }}>Point of Sale</h1>
-          <p className="text-sm mt-1" style={{ color: 'var(--text-tertiary)' }}>Search and add items to bill</p>
+          <h1 className="text-2xl font-bold text-text-primary">Point of Sale</h1>
+          <p className="text-sm mt-1 text-text-tertiary">Search and add items to bill</p>
         </div>
 
         {/* Search */}
         <div className="relative">
-          <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: 'var(--text-tertiary)' }} />
+          <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-text-tertiary" />
           <input
             type="text"
             placeholder="Search by item name or SKU..."
@@ -213,18 +213,18 @@ export default function POS() {
                     onClick={() => addToCart(item)}
                     className="w-full flex items-center gap-3 px-4 py-3 text-left transition-colors hover:bg-[var(--bg-tertiary)]"
                   >
-                    <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ background: 'var(--bg-tertiary)' }}>
+                    <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-bg-tertiary">
                       {CATEGORIES.find(c => c.id === item.category)?.icon || '💎'}
                     </div>
                     <div className="flex-1">
-                      <p className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>{item.name}</p>
-                      <p className="text-[10px]" style={{ color: 'var(--text-tertiary)' }}>
+                      <p className="text-sm font-semibold text-text-primary">{item.name}</p>
+                      <p className="text-[10px] text-text-tertiary">
                         {item.sku} • {item.metalType} {item.purity} • {formatWeight(item.netWeight)} • Qty: {item.quantity}
                       </p>
                     </div>
                     <div className="text-right">
                       <p className="text-sm font-mono font-bold gold-text">{formatCurrency(pricing.total)}</p>
-                      <p className="text-[10px]" style={{ color: 'var(--text-tertiary)' }}>incl. VAT</p>
+                      <p className="text-[10px] text-text-tertiary">incl. VAT</p>
                     </div>
                   </button>
                 );
@@ -236,7 +236,7 @@ export default function POS() {
         {/* Cart Items */}
         <div className="flex-1 overflow-y-auto space-y-2">
           {cart.length === 0 ? (
-            <div className="flex flex-col items-center justify-center h-full" style={{ color: 'var(--text-tertiary)' }}>
+            <div className="flex flex-col items-center justify-center h-full text-text-tertiary">
               <ShoppingCart size={48} className="mb-3 opacity-30" />
               <p className="text-sm">Cart is empty</p>
               <p className="text-xs">Search for items to add to the bill</p>
@@ -248,11 +248,11 @@ export default function POS() {
                   {index + 1}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-semibold truncate" style={{ color: 'var(--text-primary)' }}>{item.name}</p>
-                  <p className="text-[10px]" style={{ color: 'var(--text-tertiary)' }}>
+                  <p className="text-sm font-semibold truncate text-text-primary">{item.name}</p>
+                  <p className="text-[10px] text-text-tertiary">
                     {item.sku} • {item.metalType} {item.purity} • {formatWeight(item.netWeight)}
                   </p>
-                  <p className="text-xs mt-1 font-mono" style={{ color: 'var(--text-secondary)' }}>
+                  <p className="text-xs mt-1 font-mono text-text-secondary">
                     {formatCurrency(item.unitPrice)} × {item.quantity}
                   </p>
                 </div>
@@ -260,7 +260,7 @@ export default function POS() {
                   <button onClick={() => updateCartQty(item.id, -1)} className="w-7 h-7 rounded-lg flex items-center justify-center transition-colors hover:bg-[var(--bg-tertiary)]" style={{ border: '1px solid var(--border-color-subtle)', color: 'var(--text-secondary)' }}>
                     <Minus size={12} />
                   </button>
-                  <span className="w-8 text-center font-mono font-bold text-sm" style={{ color: 'var(--text-primary)' }}>{item.quantity}</span>
+                  <span className="w-8 text-center font-mono font-bold text-sm text-text-primary">{item.quantity}</span>
                   <button onClick={() => updateCartQty(item.id, 1)} className="w-7 h-7 rounded-lg flex items-center justify-center transition-colors hover:bg-[var(--bg-tertiary)]" style={{ border: '1px solid var(--border-color-subtle)', color: 'var(--text-secondary)' }}>
                     <Plus size={12} />
                   </button>
@@ -280,16 +280,16 @@ export default function POS() {
       {/* Right: Bill Summary */}
       <div className="w-[380px] flex-shrink-0 flex flex-col glass-card-static overflow-hidden">
         {/* Customer */}
-        <div className="p-4 border-b" style={{ borderColor: 'var(--border-color-subtle)' }}>
+        <div className="p-4 border-b border-border-color-subtle">
           <label className="form-label">Customer</label>
           {selectedCustomer ? (
-            <div className="flex items-center gap-2 p-2 rounded-lg" style={{ background: 'var(--bg-primary)' }}>
+            <div className="flex items-center gap-2 p-2 rounded-lg bg-bg-primary">
               <div className="w-8 h-8 rounded-full gold-gradient flex items-center justify-center flex-shrink-0">
                 <span className="text-[10px] font-bold text-[#0F0F1A]">{selectedCustomer.name.split(' ').map(n => n[0]).join('').slice(0, 2)}</span>
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-xs font-semibold truncate" style={{ color: 'var(--text-primary)' }}>{selectedCustomer.name}</p>
-                <p className="text-[10px]" style={{ color: 'var(--text-tertiary)' }}>{selectedCustomer.phone}</p>
+                <p className="text-xs font-semibold truncate text-text-primary">{selectedCustomer.name}</p>
+                <p className="text-[10px] text-text-tertiary">{selectedCustomer.phone}</p>
               </div>
               <button onClick={() => setSelectedCustomer(null)} className="text-[#EF4444]"><X size={14} /></button>
             </div>
@@ -309,9 +309,9 @@ export default function POS() {
                   {filteredCustomers.map(c => (
                     <button key={c.id} onClick={() => { setSelectedCustomer(c); setShowCustomerSelect(false); setCustomerSearch(''); }}
                       className="w-full flex items-center gap-2 px-3 py-2 text-left text-xs hover:bg-[var(--bg-tertiary)] transition-colors">
-                      <User size={12} style={{ color: 'var(--text-tertiary)' }} />
-                      <span style={{ color: 'var(--text-primary)' }}>{c.name}</span>
-                      <span style={{ color: 'var(--text-tertiary)' }}>{c.phone}</span>
+                      <User size={12} className="text-text-tertiary" />
+                      <span className="text-text-primary">{c.name}</span>
+                      <span className="text-text-tertiary">{c.phone}</span>
                     </button>
                   ))}
                   <button onClick={() => setShowCustomerSelect(false)}
@@ -333,14 +333,14 @@ export default function POS() {
               ['Subtotal', formatCurrency(cartTotals.subtotal)],
             ].map(([label, val]) => (
               <div key={label} className="flex justify-between text-sm">
-                <span style={{ color: 'var(--text-tertiary)' }}>{label}</span>
-                <span className="font-mono" style={{ color: 'var(--text-secondary)' }}>{val}</span>
+                <span className="text-text-tertiary">{label}</span>
+                <span className="font-mono text-text-secondary">{val}</span>
               </div>
             ))}
           </div>
 
           {/* Discount */}
-          <div className="p-3 rounded-xl" style={{ background: 'var(--bg-primary)' }}>
+          <div className="p-3 rounded-xl bg-bg-primary">
             <label className="form-label">Discount</label>
             <div className="flex gap-2">
               <input type="number" value={discount} onChange={e => setDiscount(Number(e.target.value) || 0)} className="form-input text-sm flex-1" placeholder="0" />
@@ -355,7 +355,7 @@ export default function POS() {
           </div>
 
           {/* Old Gold Exchange */}
-          <div className="p-3 rounded-xl" style={{ background: 'var(--bg-primary)' }}>
+          <div className="p-3 rounded-xl bg-bg-primary">
             <div className="flex items-center justify-between mb-2">
               <label className="form-label mb-0">Old Gold Exchange</label>
               <button onClick={() => setShowExchange(!showExchange)} className="text-[10px] font-semibold gold-text">
@@ -372,7 +372,7 @@ export default function POS() {
                     <option value="18k">18K</option>
                   </select>
                 </div>
-                <button onClick={calculateExchange} className="btn btn-secondary btn-sm w-full">Calculate Value</button>
+                <button onClick={calculateExchange} className="btn btn-secondary w-full mt-2">Calculate Value</button>
                 {exchangeValue > 0 && (
                   <p className="text-xs text-[#10B981] font-semibold">Exchange value: -{formatCurrency(exchangeValue)}</p>
                 )}
@@ -381,25 +381,25 @@ export default function POS() {
           </div>
 
           {/* Totals */}
-          <div className="space-y-2 pt-3 border-t" style={{ borderColor: 'var(--border-color-subtle)' }}>
+          <div className="space-y-2 pt-3 border-t border-border-color-subtle">
             <div className="flex justify-between text-sm">
-              <span style={{ color: 'var(--text-tertiary)' }}>VAT (13%)</span>
-              <span className="font-mono" style={{ color: 'var(--text-secondary)' }}>{formatCurrency(cartTotals.vat)}</span>
+              <span className="text-text-tertiary">VAT (13%)</span>
+              <span className="font-mono text-text-secondary">{formatCurrency(cartTotals.vat)}</span>
             </div>
             {cartTotals.discountAmount > 0 && (
               <div className="flex justify-between text-sm">
-                <span style={{ color: 'var(--text-tertiary)' }}>Discount</span>
+                <span className="text-text-tertiary">Discount</span>
                 <span className="font-mono text-[#10B981]">-{formatCurrency(cartTotals.discountAmount)}</span>
               </div>
             )}
             {cartTotals.exchangeValue > 0 && (
               <div className="flex justify-between text-sm">
-                <span style={{ color: 'var(--text-tertiary)' }}>Exchange</span>
+                <span className="text-text-tertiary">Exchange</span>
                 <span className="font-mono text-[#10B981]">-{formatCurrency(cartTotals.exchangeValue)}</span>
               </div>
             )}
-            <div className="flex justify-between pt-2 border-t" style={{ borderColor: 'var(--border-color)' }}>
-              <span className="text-sm font-bold" style={{ color: 'var(--text-primary)' }}>Grand Total</span>
+            <div className="flex justify-between pt-2 border-t border-border-color">
+              <span className="text-sm font-bold text-text-primary">Grand Total</span>
               <span className="text-xl font-bold font-mono gold-text">{formatCurrency(cartTotals.grandTotal)}</span>
             </div>
           </div>
@@ -428,11 +428,11 @@ export default function POS() {
         </div>
 
         {/* Checkout Button */}
-        <div className="p-4 border-t" style={{ borderColor: 'var(--border-color)' }}>
+        <div className="p-4 border-t border-border-color bg-bg-card">
           <button
             onClick={handleCheckout}
             disabled={cart.length === 0}
-            className="btn btn-primary w-full py-3 text-base disabled:opacity-40 disabled:cursor-not-allowed"
+            className="btn btn-primary w-full disabled:opacity-40 disabled:cursor-not-allowed"
           >
             <Receipt size={18} />
             Complete Sale • {formatCurrency(cartTotals.grandTotal)}
@@ -444,11 +444,11 @@ export default function POS() {
       <Modal isOpen={showInvoice} onClose={() => setShowInvoice(false)} title="Invoice Generated" width="max-w-2xl">
         {lastInvoice && (
           <div id="invoice-print">
-            <div className="text-center mb-6 pb-4 border-b" style={{ borderColor: 'var(--border-color)' }}>
+            <div className="text-center mb-6 pb-4 border-b border-border-color">
               <h2 className="text-[16px] font-bold gold-text">Shreehans RKS Khushi Jewellers</h2>
-              <p className="text-[10px]" style={{ color: 'var(--text-tertiary)' }}>श्रीहंस आर.के.एस. खुशी ज्वेलर्स</p>
-              <p className="text-[10px] mt-1" style={{ color: 'var(--text-tertiary)' }}>Nepal | 01-xxxxxxx</p>
-              <p className="text-[10px]" style={{ color: 'var(--text-tertiary)' }}>PAN: 000000000 | VAT: VAT-000000000</p>
+              <p className="text-[10px] text-text-tertiary">श्रीहंस आर.के.एस. खुशी ज्वेलर्स</p>
+              <p className="text-[10px] mt-1 text-text-tertiary">Nepal | 01-xxxxxxx</p>
+              <p className="text-[10px] text-text-tertiary">PAN: 000000000 | VAT: VAT-000000000</p>
             </div>
             <div className="flex justify-between mb-4 text-xs">
               <div>
@@ -462,7 +462,7 @@ export default function POS() {
             </div>
             <table className="w-full text-xs mb-4">
               <thead>
-                <tr className="border-b" style={{ borderColor: 'var(--border-color)' }}>
+                <tr className="border-b border-border-color">
                   <th className="text-left py-2">Item</th>
                   <th className="text-right py-2">Qty</th>
                   <th className="text-right py-2">Price</th>
@@ -471,10 +471,10 @@ export default function POS() {
               </thead>
               <tbody>
                 {lastInvoice.items.map((item, i) => (
-                  <tr key={i} className="border-b" style={{ borderColor: 'var(--border-color-subtle)' }}>
+                  <tr key={i} className="border-b border-border-color-subtle">
                     <td className="py-2">
                       <p className="font-semibold">{item.name}</p>
-                      <p style={{ color: 'var(--text-tertiary)' }}>{item.sku}</p>
+                      <p className="text-text-tertiary">{item.sku}</p>
                     </td>
                     <td className="text-right font-mono">{item.quantity}</td>
                     <td className="text-right font-mono">{formatCurrency(item.unitPrice)}</td>
@@ -483,12 +483,12 @@ export default function POS() {
                 ))}
               </tbody>
             </table>
-            <div className="space-y-1 text-sm pt-3 border-t" style={{ borderColor: 'var(--border-color)' }}>
+            <div className="space-y-1 text-sm pt-3 border-t border-border-color">
               <div className="flex justify-between"><span>Subtotal</span><span className="font-mono">{formatCurrency(lastInvoice.subtotal)}</span></div>
               {lastInvoice.discount > 0 && <div className="flex justify-between text-[#10B981]"><span>Discount</span><span className="font-mono">-{formatCurrency(lastInvoice.discount)}</span></div>}
               <div className="flex justify-between"><span>VAT (13%)</span><span className="font-mono">{formatCurrency(lastInvoice.vat)}</span></div>
               {lastInvoice.exchangeValue > 0 && <div className="flex justify-between text-[#10B981]"><span>Old Gold Exchange</span><span className="font-mono">-{formatCurrency(lastInvoice.exchangeValue)}</span></div>}
-              <div className="flex justify-between pt-2 border-t text-lg font-bold" style={{ borderColor: 'var(--border-color)' }}>
+              <div className="flex justify-between pt-2 border-t text-lg font-bold border-border-color">
                 <span>Grand Total</span>
                 <span className="font-mono gold-text">{formatCurrency(lastInvoice.total)}</span>
               </div>
@@ -498,7 +498,7 @@ export default function POS() {
             </p>
           </div>
         )}
-        <div className="flex justify-end gap-3 mt-4 pt-3 border-t no-print" style={{ borderColor: 'var(--border-color-subtle)' }}>
+        <div className="flex justify-end gap-3 mt-4 pt-3 border-t no-print border-border-color-subtle">
           <button className="btn btn-secondary btn-sm" onClick={() => setShowInvoice(false)}>Close</button>
           <button className="btn btn-primary btn-sm" onClick={() => window.print()}>
             <Printer size={14} /> Print Invoice
