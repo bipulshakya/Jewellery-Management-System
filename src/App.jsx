@@ -11,6 +11,7 @@ import Purchases from './pages/Purchases';
 import Repairs from './pages/Repairs';
 import Accounting from './pages/Accounting';
 import Settings from './pages/Settings';
+import About from './pages/About';
 
 export default function App() {
   return (
@@ -28,6 +29,7 @@ export default function App() {
             <Route path="repairs" element={<Repairs />} />
             <Route path="accounting" element={<Accounting />} />
             <Route path="settings" element={<Settings />} />
+            <Route path="about" element={<About />} />
           </Route>
         </Routes>
       </BrowserRouter>

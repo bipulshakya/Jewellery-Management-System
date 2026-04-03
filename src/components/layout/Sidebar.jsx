@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 import {
   LayoutDashboard, Package, ShoppingCart, Users, BarChart3,
   ClipboardList, Truck, Wrench, Calculator, Settings,
-  ChevronLeft, ChevronRight, Gem
+  ChevronLeft, ChevronRight, Gem, CircleHelp
 } from 'lucide-react';
 
 const navItems = [
@@ -23,17 +23,18 @@ const navItems = [
   ]},
   { label: 'System', items: [
     { path: '/settings', icon: Settings, label: 'Settings' },
+    { path: '/about', icon: CircleHelp, label: 'About' },
   ]},
 ];
 
 export default function Sidebar({ collapsed, onToggle }) {
   return (
     <aside
-      className={`fixed left-0 top-0 h-full z-40 transition-all duration-300 ease-in-out flex flex-col bg-bg-secondary border-r border-border-primary ${collapsed ? 'w-[72px]' : 'w-[260px]'}`}
+      className={`fixed left-0 top-0 h-full z-40 transition-all duration-300 ease-in-out flex flex-col bg-bg-secondary border-r border-border-primary ${collapsed ? 'w-18' : 'w-65'}`}
     >
       {/* Logo */}
       <div className="flex items-center gap-3 px-5 py-5 border-b border-border-primary">
-        <div className="w-9 h-9 rounded-xl gold-gradient flex items-center justify-center flex-shrink-0">
+        <div className="w-9 h-9 rounded-xl gold-gradient flex items-center justify-center shrink-0">
           <Gem size={20} color="#0F0F1A" strokeWidth={2.5} />
         </div>
         {!collapsed && (
@@ -62,13 +63,13 @@ export default function Sidebar({ collapsed, onToggle }) {
                   className={({ isActive }) =>
                     `flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 group ${
                       isActive
-                        ? 'sidebar-active bg-[rgba(218,165,32,0.1)] text-[#DAA520]'
+                        ? 'sidebar-active bg-[rgba(218,165,32,0.1)] text-gold-500'
                         : 'hover:bg-bg-tertiary text-text-secondary'
                     }`
                   }
                   title={collapsed ? item.label : undefined}
                 >
-                  <item.icon size={20} strokeWidth={1.8} className="flex-shrink-0" />
+                  <item.icon size={20} strokeWidth={1.8} className="shrink-0" />
                   {!collapsed && <span className="sidebar-text">{item.label}</span>}
                 </NavLink>
               ))}
