@@ -147,7 +147,7 @@ export default function Inventory() {
           {lowStockCount > 0 && (
             <div className="flex items-center gap-2 px-3 py-2 rounded-xl" style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.2)' }}>
               <AlertTriangle size={14} color="#EF4444" />
-              <span className="text-xs font-semibold text-[#EF4444]">{lowStockCount} Low Stock</span>
+              <span className="text-xs font-semibold text-ruby-500">{lowStockCount} Low Stock</span>
             </div>
           )}
           <button className="btn btn-secondary" onClick={exportCSV}>
@@ -162,7 +162,7 @@ export default function Inventory() {
       {/* Filters */}
       <div className="glass-card-static p-4">
         <div className="flex flex-wrap items-center gap-3">
-          <div className="relative flex-1 min-w-[200px]">
+          <div className="relative flex-1 min-w-50">
             <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-text-tertiary" />
             <input
               type="text"
@@ -235,7 +235,7 @@ export default function Inventory() {
                     <td><span className="font-mono text-sm">{formatWeight(item.netWeight)}</span></td>
                     <td><span className="font-mono text-sm font-semibold gold-text">{formatCurrency(pricing.total)}</span></td>
                     <td>
-                      <span className={`font-mono text-sm font-bold ${isLow ? 'text-[#EF4444]' : ''}`}>
+                      <span className={`font-mono text-sm font-bold ${isLow ? 'text-ruby-500' : ''}`}>
                         {item.quantity}
                       </span>
                     </td>
@@ -347,7 +347,7 @@ export default function Inventory() {
           </div>
           <div className="flex items-center gap-3">
             <label className="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" checked={form.hallmarked} onChange={e => setForm({ ...form, hallmarked: e.target.checked })} className="w-4 h-4 rounded accent-[#DAA520]" />
+              <input type="checkbox" checked={form.hallmarked} onChange={e => setForm({ ...form, hallmarked: e.target.checked })} className="w-4 h-4 rounded accent-gold-500" />
               <span className="text-sm text-text-secondary">Hallmarked</span>
             </label>
           </div>

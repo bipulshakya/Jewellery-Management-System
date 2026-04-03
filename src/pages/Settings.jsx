@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { Settings as SettingsIcon, Store, Users, DollarSign, Bell, Database, Save } from 'lucide-react';
-import { useStore, useToast, useTheme } from '../store/useStore';
+import { useToast, useTheme } from '../store/useStore';
 import { METAL_RATES, STORE_INFO } from '../data/seedData';
-import { formatCurrency } from '../utils/formatters';
 
 const TABS = [
   { id: 'store', label: 'Store Info', icon: Store },
@@ -68,7 +67,7 @@ export default function Settings() {
 
       <div className="flex gap-6">
         {/* Settings Nav */}
-        <div className="w-48 flex-shrink-0 space-y-1">
+        <div className="w-48 shrink-0 space-y-1">
           {TABS.map(tab => (
             <button
               key={tab.id}
@@ -251,7 +250,7 @@ export default function Settings() {
 
               <div className="p-4 rounded-xl flex items-center justify-between" style={{ background: 'rgba(239,68,68,0.05)', border: '1px solid rgba(239,68,68,0.15)' }}>
                 <div>
-                  <p className="text-sm font-semibold text-[#EF4444]">Reset All Data</p>
+                  <p className="text-sm font-semibold text-ruby-500">Reset All Data</p>
                   <p className="text-xs text-text-tertiary">Reset to default sample data (cannot be undone)</p>
                 </div>
                 <button className="btn btn-danger btn-sm" onClick={resetData}>Reset</button>

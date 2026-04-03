@@ -211,7 +211,7 @@ export default function POS() {
                   <button
                     key={item.id}
                     onClick={() => addToCart(item)}
-                    className="w-full flex items-center gap-3 px-4 py-3 text-left transition-colors hover:bg-[var(--bg-tertiary)]"
+                    className="w-full flex items-center gap-3 px-4 py-3 text-left transition-colors hover:bg-(--bg-tertiary)"
                   >
                     <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-bg-tertiary">
                       {CATEGORIES.find(c => c.id === item.category)?.icon || '💎'}
@@ -257,18 +257,18 @@ export default function POS() {
                   </p>
                 </div>
                 <div className="flex items-center gap-2">
-                  <button onClick={() => updateCartQty(item.id, -1)} className="w-7 h-7 rounded-lg flex items-center justify-center transition-colors hover:bg-[var(--bg-tertiary)]" style={{ border: '1px solid var(--border-color-subtle)', color: 'var(--text-secondary)' }}>
+                  <button onClick={() => updateCartQty(item.id, -1)} className="w-7 h-7 rounded-lg flex items-center justify-center transition-colors hover:bg-(--bg-tertiary)" style={{ border: '1px solid var(--border-color-subtle)', color: 'var(--text-secondary)' }}>
                     <Minus size={12} />
                   </button>
                   <span className="w-8 text-center font-mono font-bold text-sm text-text-primary">{item.quantity}</span>
-                  <button onClick={() => updateCartQty(item.id, 1)} className="w-7 h-7 rounded-lg flex items-center justify-center transition-colors hover:bg-[var(--bg-tertiary)]" style={{ border: '1px solid var(--border-color-subtle)', color: 'var(--text-secondary)' }}>
+                  <button onClick={() => updateCartQty(item.id, 1)} className="w-7 h-7 rounded-lg flex items-center justify-center transition-colors hover:bg-(--bg-tertiary)" style={{ border: '1px solid var(--border-color-subtle)', color: 'var(--text-secondary)' }}>
                     <Plus size={12} />
                   </button>
                 </div>
-                <div className="text-right min-w-[100px]">
+                <div className="text-right min-w-25">
                   <p className="text-sm font-mono font-bold gold-text">{formatCurrency(item.lineTotal)}</p>
                 </div>
-                <button onClick={() => removeFromCart(item.id)} className="p-1.5 rounded-lg text-[#EF4444] transition-colors hover:bg-[rgba(239,68,68,0.1)]">
+                <button onClick={() => removeFromCart(item.id)} className="p-1.5 rounded-lg text-ruby-500 transition-colors hover:bg-[rgba(239,68,68,0.1)]">
                   <Trash2 size={14} />
                 </button>
               </div>
@@ -278,20 +278,20 @@ export default function POS() {
       </div>
 
       {/* Right: Bill Summary */}
-      <div className="w-[380px] flex-shrink-0 flex flex-col glass-card-static overflow-hidden">
+      <div className="w-95 shrink-0 flex flex-col glass-card-static overflow-hidden">
         {/* Customer */}
         <div className="p-4 border-b border-border-color-subtle">
           <label className="form-label">Customer</label>
           {selectedCustomer ? (
             <div className="flex items-center gap-2 p-2 rounded-lg bg-bg-primary">
-              <div className="w-8 h-8 rounded-full gold-gradient flex items-center justify-center flex-shrink-0">
-                <span className="text-[10px] font-bold text-[#0F0F1A]">{selectedCustomer.name.split(' ').map(n => n[0]).join('').slice(0, 2)}</span>
+              <div className="w-8 h-8 rounded-full gold-gradient flex items-center justify-center shrink-0">
+                <span className="text-[10px] font-bold text-dark-900">{selectedCustomer.name.split(' ').map(n => n[0]).join('').slice(0, 2)}</span>
               </div>
               <div className="flex-1 min-w-0">
                 <p className="text-xs font-semibold truncate text-text-primary">{selectedCustomer.name}</p>
                 <p className="text-[10px] text-text-tertiary">{selectedCustomer.phone}</p>
               </div>
-              <button onClick={() => setSelectedCustomer(null)} className="text-[#EF4444]"><X size={14} /></button>
+              <button onClick={() => setSelectedCustomer(null)} className="text-ruby-500"><X size={14} /></button>
             </div>
           ) : (
             <div className="relative">
@@ -308,14 +308,14 @@ export default function POS() {
                   style={{ background: 'var(--bg-primary)', border: '1px solid var(--border-color)' }}>
                   {filteredCustomers.map(c => (
                     <button key={c.id} onClick={() => { setSelectedCustomer(c); setShowCustomerSelect(false); setCustomerSearch(''); }}
-                      className="w-full flex items-center gap-2 px-3 py-2 text-left text-xs hover:bg-[var(--bg-tertiary)] transition-colors">
+                      className="w-full flex items-center gap-2 px-3 py-2 text-left text-xs hover:bg-(--bg-tertiary) transition-colors">
                       <User size={12} className="text-text-tertiary" />
                       <span className="text-text-primary">{c.name}</span>
                       <span className="text-text-tertiary">{c.phone}</span>
                     </button>
                   ))}
                   <button onClick={() => setShowCustomerSelect(false)}
-                    className="w-full px-3 py-2 text-left text-xs font-semibold hover:bg-[var(--bg-tertiary)] transition-colors"
+                    className="w-full px-3 py-2 text-left text-xs font-semibold hover:bg-(--bg-tertiary) transition-colors"
                     style={{ color: '#DAA520' }}>
                     + Walk-in Customer
                   </button>
@@ -350,7 +350,7 @@ export default function POS() {
               </select>
             </div>
             {cartTotals.discountAmount > 0 && (
-              <p className="text-xs mt-1 text-[#10B981]">-{formatCurrency(cartTotals.discountAmount)}</p>
+              <p className="text-xs mt-1 text-emerald-500">-{formatCurrency(cartTotals.discountAmount)}</p>
             )}
           </div>
 
@@ -374,7 +374,7 @@ export default function POS() {
                 </div>
                 <button onClick={calculateExchange} className="btn btn-secondary w-full mt-2">Calculate Value</button>
                 {exchangeValue > 0 && (
-                  <p className="text-xs text-[#10B981] font-semibold">Exchange value: -{formatCurrency(exchangeValue)}</p>
+                  <p className="text-xs text-emerald-500 font-semibold">Exchange value: -{formatCurrency(exchangeValue)}</p>
                 )}
               </div>
             )}
@@ -389,13 +389,13 @@ export default function POS() {
             {cartTotals.discountAmount > 0 && (
               <div className="flex justify-between text-sm">
                 <span className="text-text-tertiary">Discount</span>
-                <span className="font-mono text-[#10B981]">-{formatCurrency(cartTotals.discountAmount)}</span>
+                <span className="font-mono text-emerald-500">-{formatCurrency(cartTotals.discountAmount)}</span>
               </div>
             )}
             {cartTotals.exchangeValue > 0 && (
               <div className="flex justify-between text-sm">
                 <span className="text-text-tertiary">Exchange</span>
-                <span className="font-mono text-[#10B981]">-{formatCurrency(cartTotals.exchangeValue)}</span>
+                <span className="font-mono text-emerald-500">-{formatCurrency(cartTotals.exchangeValue)}</span>
               </div>
             )}
             <div className="flex justify-between pt-2 border-t border-border-color">
@@ -412,7 +412,7 @@ export default function POS() {
                 <button
                   key={mode.id}
                   onClick={() => setPaymentMode(mode.id)}
-                  className={`p-2 rounded-lg text-center text-xs font-semibold transition-all ${paymentMode === mode.id ? 'ring-2 ring-[#DAA520]' : ''}`}
+                  className={`p-2 rounded-lg text-center text-xs font-semibold transition-all ${paymentMode === mode.id ? 'ring-2 ring-gold-500' : ''}`}
                   style={{
                     background: paymentMode === mode.id ? 'rgba(218,165,32,0.1)' : 'var(--bg-primary)',
                     border: `1px solid ${paymentMode === mode.id ? 'rgba(218,165,32,0.3)' : 'var(--border-color-subtle)'}`,
@@ -485,9 +485,9 @@ export default function POS() {
             </table>
             <div className="space-y-1 text-sm pt-3 border-t border-border-color">
               <div className="flex justify-between"><span>Subtotal</span><span className="font-mono">{formatCurrency(lastInvoice.subtotal)}</span></div>
-              {lastInvoice.discount > 0 && <div className="flex justify-between text-[#10B981]"><span>Discount</span><span className="font-mono">-{formatCurrency(lastInvoice.discount)}</span></div>}
+              {lastInvoice.discount > 0 && <div className="flex justify-between text-emerald-500"><span>Discount</span><span className="font-mono">-{formatCurrency(lastInvoice.discount)}</span></div>}
               <div className="flex justify-between"><span>VAT (13%)</span><span className="font-mono">{formatCurrency(lastInvoice.vat)}</span></div>
-              {lastInvoice.exchangeValue > 0 && <div className="flex justify-between text-[#10B981]"><span>Old Gold Exchange</span><span className="font-mono">-{formatCurrency(lastInvoice.exchangeValue)}</span></div>}
+              {lastInvoice.exchangeValue > 0 && <div className="flex justify-between text-emerald-500"><span>Old Gold Exchange</span><span className="font-mono">-{formatCurrency(lastInvoice.exchangeValue)}</span></div>}
               <div className="flex justify-between pt-2 border-t text-lg font-bold border-border-color">
                 <span>Grand Total</span>
                 <span className="font-mono gold-text">{formatCurrency(lastInvoice.total)}</span>

@@ -24,7 +24,7 @@ function KPICard({ icon: Icon, label, value, subValue, trend, trendUp, color, de
           <Icon size={22} style={{ color }} />
         </div>
         {trend && (
-          <div className={`flex items-center gap-1 text-xs font-semibold px-2 py-1 rounded-lg ${trendUp ? 'text-[#10B981]' : 'text-[#EF4444]'}`}
+          <div className={`flex items-center gap-1 text-xs font-semibold px-2 py-1 rounded-lg ${trendUp ? 'text-emerald-500' : 'text-ruby-500'}`}
             style={{ background: trendUp ? 'rgba(16,185,129,0.1)' : 'rgba(239,68,68,0.1)' }}>
             {trendUp ? <ArrowUpRight size={12} /> : <ArrowDownRight size={12} />}
             {trend}
@@ -222,8 +222,8 @@ export default function Dashboard() {
           <h3 className="text-sm font-bold mb-4 text-text-primary">Recent Activity</h3>
           <div className="space-y-3">
             {recentActivity.map((activity) => (
-              <div key={activity.id} className="flex items-center gap-3 p-3 rounded-xl transition-colors hover:bg-[var(--bg-tertiary)]">
-                <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
+              <div key={activity.id} className="flex items-center gap-3 p-3 rounded-xl transition-colors hover:bg-(--bg-tertiary)">
+                <div className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0"
                   style={{ background: `${activity.color}15`, border: `1px solid ${activity.color}20` }}>
                   <activity.icon size={16} style={{ color: activity.color }} />
                 </div>

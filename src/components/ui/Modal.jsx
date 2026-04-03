@@ -11,7 +11,7 @@ export default function Modal({ isOpen, onClose, title, children, width = 'max-w
           <h2 className="text-lg font-bold text-text-primary">{title}</h2>
           <button
             onClick={onClose}
-            className="p-2 rounded-lg transition-colors hover:bg-[var(--bg-tertiary)] text-text-tertiary"
+            className="p-2 rounded-lg transition-colors hover:bg-(--bg-tertiary) text-text-tertiary"
           >
             <X size={18} />
           </button>

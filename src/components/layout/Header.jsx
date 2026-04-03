@@ -36,7 +36,7 @@ export default function Header() {
         {/* Notifications */}
         <button className="relative p-2.5 rounded-xl transition-colors duration-200 hover:bg-bg-tertiary text-text-secondary">
           <Bell size={18} />
-          <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-[#EF4444]"></span>
+          <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-ruby-500"></span>
         </button>
 
         {/* Theme Toggle */}
@@ -50,7 +50,7 @@ export default function Header() {
         {/* User Avatar */}
         <div className="flex items-center gap-2 ml-2 pl-3 border-l border-border-subtle">
           <div className="w-8 h-8 rounded-full gold-gradient flex items-center justify-center shadow-lg">
-            <span className="text-xs font-bold text-[#0F0F1A]">AD</span>
+            <span className="text-xs font-bold text-dark-900">AD</span>
           </div>
           <div className="hidden lg:block">
             <p className="text-xs font-semibold text-text-primary">Admin</p>
