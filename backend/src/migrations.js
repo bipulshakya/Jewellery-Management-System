@@ -1,6 +1,8 @@
 import process from 'node:process';
 import mysql from 'mysql2/promise';
-import 'dotenv/config';
+import { config as loadEnv } from 'dotenv';
+
+loadEnv({ path: new URL('../.env', import.meta.url) });
 
 const DB_NAME = process.env.MYSQL_DATABASE || 'jewellery_system';
 const TABLES = ['inventory', 'customers', 'suppliers', 'sales', 'repairs', 'orders'];
