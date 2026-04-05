@@ -4,10 +4,12 @@ import { randomUUID } from 'node:crypto';
 import { createHmac, timingSafeEqual } from 'node:crypto';
 import { Buffer } from 'node:buffer';
 import process from 'node:process';
+import { config as loadEnv } from 'dotenv';
 import { ensureDatabase, readDatabase, writeDatabase } from './db.js';
 import mysql from 'mysql2/promise';
 import bcrypt from 'bcrypt';
-import 'dotenv/config';
+
+loadEnv({ path: new URL('../.env', import.meta.url) });
 
 const app = express();
 const PORT = Number(process.env.PORT || 4000);

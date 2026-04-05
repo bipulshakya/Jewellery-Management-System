@@ -1,6 +1,6 @@
 import process from 'node:process';
 import mysql from 'mysql2/promise';
-import 'dotenv/config';
+import { config as loadEnv } from 'dotenv';
 import { runMigrations } from './migrations.js';
 import {
   SAMPLE_INVENTORY,
@@ -16,12 +16,13 @@ import {
 const DB_NAME = process.env.MYSQL_DATABASE || 'jewellery_system';
 const TABLES = ['inventory', 'customers', 'suppliers', 'sales', 'repairs', 'orders'];
 
+loadEnv({ path: new URL('../.env', import.meta.url) });
+
 const BASE_DB_CONFIG = {
   host: process.env.MYSQL_HOST || 'localhost',
   port: Number(process.env.MYSQL_PORT || 3306),
   user: process.env.MYSQL_USER || 'root',
-  password: process.env.MYSQL_PASSWORD || 'password',
-  database: process.env.DB_NAME || 'jewellery_system',
+  password: process.env.MYSQL_PASSWORD || '',
 };
 
 const APP_DB_CONFIG = {

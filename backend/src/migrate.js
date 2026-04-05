@@ -1,3 +1,4 @@
+import process from 'node:process';
 import { getMigrationStatus, runMigrations } from './migrations.js';
 
 async function main() {
