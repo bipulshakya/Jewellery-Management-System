@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Settings as SettingsIcon, Store, Users, DollarSign, Bell, Database, Save } from 'lucide-react';
-import { useToast, useTheme } from '../store/useStore';
+import { useStore, useToast, useTheme } from '../store/useStore';
 import { METAL_RATES, STORE_INFO } from '../data/seedData';
 
 const TABS = [
@@ -15,47 +15,104 @@ export default function Settings() {
   const { addToast } = useToast();
   const { theme, toggleTheme } = useTheme();
   const [activeTab, setActiveTab] = useState('store');
+  const { data: storeInfoApi, update: updateStoreInfo, isLoading: isStoreInfoLoading } = useStore('storeInfo');
+  const { data: ratesApi, update: updateRates, isLoading: isRatesLoading } = useStore('metalRates');
 
-  const [storeInfo, setStoreInfo] = useState(() => {
-    try { return JSON.parse(localStorage.getItem('jerp_storeInfo')) || STORE_INFO; }
-    catch { return STORE_INFO; }
-  });
+  const [storeInfo, setStoreInfo] = useState(STORE_INFO);
+  const [rates, setRates] = useState(METAL_RATES);
 
-  const [rates, setRates] = useState(() => {
-    try { return JSON.parse(localStorage.getItem('metalRates')) || METAL_RATES; }
-    catch { return METAL_RATES; }
-  });
+  useEffect(() => {
+    if (storeInfoApi && Object.keys(storeInfoApi).length > 0) {
+      setStoreInfo(storeInfoApi);
+    }
+  }, [storeInfoApi]);
 
-  const saveStoreInfo = () => {
-    localStorage.setItem('jerp_storeInfo', JSON.stringify(storeInfo));
-    addToast('Store information saved', 'success');
+  useEffect(() => {
+    if (ratesApi && Object.keys(ratesApi).length > 0) {
+      setRates(ratesApi);
+    }
+  }, [ratesApi]);
+
+  const saveStoreInfo = async () => {
+    try {
+      await updateStoreInfo(null, storeInfo);
+      addToast('Store information saved', 'success');
+    } catch (error) {
+      addToast(error.message || 'Unable to save store information', 'error');
+    }
   };
 
-  const saveRates = () => {
-    localStorage.setItem('metalRates', JSON.stringify(rates));
-    addToast('Metal rates updated', 'success');
+  const saveRates = async () => {
+    try {
+      await updateRates(null, rates);
+      addToast('Metal rates updated', 'success');
+    } catch (error) {
+      addToast(error.message || 'Unable to update metal rates', 'error');
+    }
   };
 
   const resetData = () => {
-    if (window.confirm('This will reset ALL data to defaults. Are you sure?')) {
-      localStorage.clear();
-      window.location.reload();
-    }
+    addToast('Server reset is not enabled in this build', 'info');
   };
 
-  const exportData = () => {
-    const data = {};
-    for (let i = 0; i < localStorage.length; i++) {
-      const key = localStorage.key(i);
-      if (key.startsWith('jerp_') || key === 'metalRates') {
-        data[key] = localStorage.getItem(key);
+  const exportData = async () => {
+    try {
+      const token = localStorage.getItem('jerp_api_token');
+      if (!token) {
+        addToast('Please load any page data once before exporting backup', 'info');
+        return;
       }
+
+      const apiBase = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000';
+      const headers = { Authorization: `Bearer ${token}` };
+      const urls = [
+        'inventory',
+        'customers',
+        'suppliers',
+        'sales',
+        'repairs',
+        'orders',
+      ].map((resource) => fetch(`${apiBase}/api/${resource}`, { headers }));
+      const settingsUrls = [
+        fetch(`${apiBase}/api/settings/metal-rates`, { headers }),
+        fetch(`${apiBase}/api/settings/store-info`, { headers }),
+      ];
+
+      const responses = await Promise.all([...urls, ...settingsUrls]);
+      for (const response of responses) {
+        if (!response.ok) {
+          throw new Error(`Backup export failed (${response.status})`);
+        }
+      }
+
+      const [inventory, customers, suppliers, sales, repairs, orders, metalRates, storeInfoPayload] =
+        await Promise.all(responses.map((response) => response.json()));
+
+      const backup = {
+        exportedAt: new Date().toISOString(),
+        inventory,
+        customers,
+        suppliers,
+        sales,
+        repairs,
+        orders,
+        settings: {
+          metalRates,
+          storeInfo: storeInfoPayload,
+        },
+      };
+
+      const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'jewellery-erp-backup.json';
+      a.click();
+      URL.revokeObjectURL(url);
+      addToast('Backup exported', 'success');
+    } catch (error) {
+      addToast(error.message || 'Unable to export backup', 'error');
     }
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url; a.download = 'jewellery-erp-backup.json'; a.click();
-    addToast('Backup exported', 'success');
   };
 
   return (
@@ -90,6 +147,7 @@ export default function Settings() {
           {activeTab === 'store' && (
             <div className="glass-card-static p-6 space-y-4">
               <h3 className="text-lg font-bold text-text-primary">Store Information</h3>
+              {isStoreInfoLoading && <p className="text-xs text-text-tertiary">Loading store information...</p>}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="form-label">Store Name (English)</label>
@@ -136,6 +194,7 @@ export default function Settings() {
           {activeTab === 'rates' && (
             <div className="glass-card-static p-6 space-y-4">
               <h3 className="text-lg font-bold text-text-primary">Metal Rates (per gram)</h3>
+              {isRatesLoading && <p className="text-xs text-text-tertiary">Loading current rates...</p>}
               <p className="text-xs text-text-tertiary">Update current market rates. Changes will affect all price calculations.</p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {[

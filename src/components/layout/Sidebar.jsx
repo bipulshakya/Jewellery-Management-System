@@ -4,6 +4,7 @@ import {
   ClipboardList, Truck, Wrench, Calculator, Settings,
   ChevronLeft, ChevronRight, Gem, CircleHelp
 } from 'lucide-react';
+import { useAuth } from '../../store/useStore';
 
 const navItems = [
   { label: 'Core', items: [
@@ -22,12 +23,24 @@ const navItems = [
     { path: '/accounting', icon: Calculator, label: 'Accounting' },
   ]},
   { label: 'System', items: [
-    { path: '/settings', icon: Settings, label: 'Settings' },
+    { path: '/settings', icon: Settings, label: 'Settings', roles: ['admin'] },
     { path: '/about', icon: CircleHelp, label: 'About' },
   ]},
 ];
 
 export default function Sidebar({ collapsed, onToggle }) {
+  const { user } = useAuth();
+
+  const visibleNavItems = navItems
+    .map((group) => ({
+      ...group,
+      items: group.items.filter((item) => {
+        if (!item.roles) return true;
+        return user && item.roles.includes(user.role);
+      }),
+    }))
+    .filter((group) => group.items.length > 0);
+
   return (
     <aside
       className={`fixed left-0 top-0 h-full z-40 transition-all duration-300 ease-in-out flex flex-col bg-bg-secondary border-r border-border-primary ${collapsed ? 'w-18' : 'w-65'}`}
@@ -47,7 +60,7 @@ export default function Sidebar({ collapsed, onToggle }) {
 
       {/* Navigation */}
       <nav className="flex-1 overflow-y-auto py-4 px-3">
-        {navItems.map((group) => (
+        {visibleNavItems.map((group) => (
           <div key={group.label} className="mb-5">
             {!collapsed && (
               <span className="text-[10px] font-bold uppercase tracking-wider px-3 mb-2 block text-text-tertiary">

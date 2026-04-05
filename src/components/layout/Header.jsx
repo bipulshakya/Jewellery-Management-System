@@ -1,11 +1,14 @@
-import { Sun, Moon, Bell, Search } from 'lucide-react';
-import { useTheme } from '../../store/useStore';
+import { Sun, Moon, Bell, Search, LogOut } from 'lucide-react';
+import { useAuth, useTheme, useStore } from '../../store/useStore';
 import { METAL_RATES } from '../../data/seedData';
 import { formatCurrency } from '../../utils/formatters';
 
 export default function Header() {
   const { theme, toggleTheme } = useTheme();
-  const rates = JSON.parse(localStorage.getItem('metalRates')) || METAL_RATES;
+  const { user, logout } = useAuth();
+  const { data: apiRates } = useStore('metalRates');
+  const rates = apiRates && Object.keys(apiRates).length > 0 ? apiRates : METAL_RATES;
+  const initials = (user?.username || 'US').slice(0, 2).toUpperCase();
 
   return (
     <header className="sticky top-0 z-30 flex items-center justify-between px-6 py-3 border-b bg-bg-secondary border-border-primary backdrop-blur-xl">
@@ -50,12 +53,19 @@ export default function Header() {
         {/* User Avatar */}
         <div className="flex items-center gap-2 ml-2 pl-3 border-l border-border-subtle">
           <div className="w-8 h-8 rounded-full gold-gradient flex items-center justify-center shadow-lg">
-            <span className="text-xs font-bold text-dark-900">AD</span>
+            <span className="text-xs font-bold text-dark-900">{initials}</span>
           </div>
           <div className="hidden lg:block">
-            <p className="text-xs font-semibold text-text-primary">Admin</p>
-            <p className="text-[10px] text-text-tertiary">Manager</p>
+            <p className="text-xs font-semibold text-text-primary">{user?.username || 'User'}</p>
+            <p className="text-[10px] text-text-tertiary">{user?.role === 'admin' ? 'Administrator' : 'Staff'}</p>
           </div>
+          <button
+            onClick={logout}
+            className="ml-2 p-2 rounded-lg transition-colors hover:bg-bg-tertiary text-text-tertiary"
+            title="Logout"
+          >
+            <LogOut size={14} />
+          </button>
         </div>
       </div>
     </header>
